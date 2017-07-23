@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class = "no-js" lang="en">
+    <head>
+        <title>Effex</title>
+        <link rel="stylesheet" href="parallax.css">
+        <meta charset = "UTF-8" />
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"> -->
+        <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no" />
+    </head>
+    
+    <body>
+        
+        <div id = "wrapper">
+            <!-- <div class="container12"> -->
+            <ul id = "scene" data-limit-x = "100" data-limit-y = "100" data-calibrate-x = "true" data-friction-x="0.1" data-friction-y="0.1" data-scalar-x="5" data-scalar-y="5">
+                <li id ="bg" class = "layer" data-depth="0.80"><img src="images/bg.jpg" alt=""></li>
+                <li id="middle" class="layer" data-depth="0.40"><img src="images/flare1.png" alt=""></li>
+                <li id="front" class="layer" data-depth="0.0"><img src="images/flare2.png" alt=""></li>
+            </ul>
+            <!-- </div> -->
+        </div>
+        
+        <!-- Scripts -->
+        <script src="parallax.min.js"></script>
+        <script>
+            
+            // Pretty simple huh?
+            var scene = document.getElementById('scene');
+            var parallax = new Parallax(scene);
+            
+        </script>
+    </body>
+</html>

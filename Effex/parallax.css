@@ -1,0 +1,88 @@
+#bg {
+/*    background: url(images/bg.jpg) no-repeat center center fixed;*/
+/*    -webkit-background-size: cover;*/
+/*    -moz-background-size: cover;*/
+/*    -o-background-size: cover;*/
+/*    background-size: cover;*/
+}
+
+#wrapper {
+    min-height: 460px;
+    position: absolute;
+    overflow: hidden;
+    display: table;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+@-webkit-keyframes phase {
+    0% {
+        opacity: 0.6; }
+    25% {
+        opacity: 0.2; }
+    50% {
+        opacity: 0.4; }
+    75% {
+        opacity: 0.2; }
+    100% {
+        opacity: 0.6; } }
+@-moz-keyframes phase {
+    0% {
+        opacity: 0.6; }
+    25% {
+        opacity: 0.2; }
+    50% {
+        opacity: 0.4; }
+    75% {
+        opacity: 0.2; }
+    100% {
+        opacity: 0.6; } }
+@-ms-keyframes phase {
+    0% {
+        opacity: 0.6; }
+    25% {
+        opacity: 0.2; }
+    50% {
+        opacity: 0.4; }
+    75% {
+        opacity: 0.2; }
+    100% {
+        opacity: 0.6; } }
+@keyframes phase {
+    0% {
+        opacity: 0.6; }
+    25% {
+        opacity: 0.2; }
+    50% {
+        opacity: 0.4; }
+    75% {
+        opacity: 0.2; }
+    100% {
+        opacity: 0.6; } }
+
+#scene {
+    display: block;
+    min-height: 460px;
+    position: relative;
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+#middle {
+/*    margin: 50%;*/
+    -webkit-animation: phase 12s 0.1s infinite linear;
+    -moz-animation: phase 12s 0.1s infinite linear;
+    animation: phase 12s 0.1s infinite linear;
+}
+
+#front {
+/*    margin: 50%;*/
+    -webkit-animation: phase 6s 0.1s infinite linear;
+    -moz-animation: phase 6s 0.1s infinite linear;
+    animation: phase 6s 0.1s infinite linear;
+}
