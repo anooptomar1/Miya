@@ -9,6 +9,43 @@
 import Foundation
 import UIKit
 
+extension UIImageView {
+    func setUpParallax(rate: Double) {
+        //three rates max
+        
+        if !(rate > 0 && rate < 4) {return}
+        
+        let min = CGFloat(-30.0*rate)
+        let max = CGFloat(30.0*rate)
+        
+        let xMotion = UIInterpolatingMotionEffect(keyPath: "layer.transform.translation.x", type: .tiltAlongHorizontalAxis)
+        xMotion.minimumRelativeValue = min
+        xMotion.maximumRelativeValue = max
+        
+        let yMotion = UIInterpolatingMotionEffect(keyPath: "layer.transform.translation.y", type: .tiltAlongVerticalAxis)
+        yMotion.minimumRelativeValue = CGFloat(-30.0)
+        yMotion.maximumRelativeValue = CGFloat(30.0)
+        
+        let motionEffectGroup = UIMotionEffectGroup()
+        motionEffectGroup.motionEffects = [xMotion,yMotion]
+        self.addMotionEffect(motionEffectGroup)
+    }
+    
+    func setUpAnimation(quiver: Double, maxAlpha: CGFloat, minAlpha: CGFloat) {
+        
+        _ = Timer.scheduledTimer(withTimeInterval: quiver, repeats: true, block: { (timer: Timer) in
+            self.alpha = maxAlpha
+            UIView.animate(withDuration: quiver/2.0, animations: {
+                self.alpha = minAlpha
+            }) { (true: Bool) in
+                UIView.animate(withDuration: quiver/2.0, animations: {
+                    self.alpha = maxAlpha
+                })
+            }
+        })
+    }
+}
+
 extension UIColor
 {
     //langua colors

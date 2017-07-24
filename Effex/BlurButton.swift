@@ -32,7 +32,10 @@ class BlurButton: UIButton {
         self.clearTextButton(button: self, title: text, color: UIColor.clear)
     }
     
-    
+    func load() {
+        self.layer.mask?.removeFromSuperlayer()
+        self.backgroundColor = UIColor.white
+    }
     
     func clearTextButton(button: UIButton, title: String, color: UIColor) {
         button.backgroundColor = color
@@ -66,7 +69,7 @@ class BlurButton: UIButton {
     
     func addBlurEffect()
     {
-        let blur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        let blur = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
         blur.frame = self.bounds
         blur.isUserInteractionEnabled = false
         self.insertSubview(blur, at: 0)

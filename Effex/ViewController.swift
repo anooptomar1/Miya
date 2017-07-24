@@ -13,46 +13,44 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+    //parallax images
+    @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet weak var flareDotsImageView: UIImageView!
+    @IBOutlet weak var flareImageView: UIImageView!
+    //end parallax images
+    
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var gtLabel: UILabel!
     
     @IBOutlet weak var dragBtn: BlurButton!
     var initialCenter : CGPoint?
     
+    @IBOutlet weak var titleButton: BlurButton!
+    
     @IBOutlet weak var entryBtn: BlurButton!
     
     @IBOutlet weak var switchBtnContainer: UIView!
+    var layerArray = NSMutableArray()
     
     //arrows
     @IBOutlet weak var arrowOne: UIImageView!
     @IBOutlet weak var arrowTwo: UIImageView!
     @IBOutlet weak var arrowThree: UIImageView!
     
-    var kWebAppWidth = CGFloat()
-    var kWebAppHeight = CGFloat()
+    var imageWidth : CGFloat?
+    var imageHeight : CGFloat?
     
     var audioPlayer = AVAudioPlayer()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        //UIColor(red: 66.0/255.0, green: 75.0/255.0, blue: 84.0/255.0, alpha: 1)
-        
-        //let gtView = GTBackground(frame: self.view.frame, initialRed: 66.0, initialGreen: 75.0, initialBlue: 84.0, speed: 0.001)
-        //self.view.addSubview(gtView)
-//        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width*2, height: self.view.frame.height*2)
-//        self.webView.scrollView.contentSize = CGSize(width: self.view.frame.width*2, height: self.view.frame.height*2)
-        
+    
         self.initialCenter = self.dragBtn.center
         
-        self.gtLabel.layer.shadowColor = UIColor.white.cgColor
-        self.gtLabel.layer.shadowOpacity = 1
-        self.gtLabel.layer.shadowOffset = CGSize.init(width: 5, height:5)
-        self.gtLabel.layer.shadowRadius = 10
-        
-        self.webView.delegate = self
-        self.webView.scalesPageToFit = true
+        self.titleButton.addBlurEffect()
+        self.titleButton.updateMaskForView(text: "Miya")
+        self.titleButton.isUserInteractionEnabled = false
         
         self.dragBtn.addBlurEffect()
         self.dragBtn.updateMaskForView(text: "Drag Me")
@@ -64,21 +62,38 @@ class ViewController: UIViewController {
         self.dragBtn.addTarget(self, action: #selector(beganDrag(btn:event:)), for: UIControlEvents.touchDown)
         self.dragBtn.addTarget(self, action: #selector(exitDrag(btn:event:)), for: UIControlEvents.touchUpInside)
         
+        self.imageWidth = self.bgImageView.frame.width
+        self.imageHeight = self.bgImageView.frame.width
+        
         self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
-        
-        webView.alpha = 0.0
-        loadHtmlFile()
-        
-        loadCoreMotion()
         
         _ = Timer.scheduledTimer(withTimeInterval: 4.8, repeats: true) { (timer: Timer) in
             self.animateArrows()
         }
+
+        //orienation
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+
+        //Parallax set up
+        self.bgImageView.setUpParallax(rate: 3.0)
+        self.flareDotsImageView.setUpParallax(rate: 2.0)
+        self.flareImageView.setUpParallax(rate: 1.0)
+        
+        self.flareDotsImageView.setUpAnimation(quiver: 6.0, maxAlpha: 0.84, minAlpha: 0.24)
+        self.flareImageView.setUpAnimation(quiver: 6.0, maxAlpha: 0.48, minAlpha: 1.0)
     }
     
     // MARK: - button options
-    
     func maskRespectToButton(viewToMask: UIView, maskRect: CGRect, invert: Bool = false) {
+        
+        guard let sublayers = viewToMask.layer.sublayers else {return}
+        for layer in sublayers {
+            if(layerArray.contains(layer)){
+                layer.removeFromSuperlayer()
+                layerArray.remove(layer)
+            }
+        }
+        
         let radius = maskRect.size.width/2 + 2
         let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: self.switchBtnContainer.bounds.size.width, height: self.switchBtnContainer.bounds.size.height), cornerRadius: 0)
         print(self.dragBtn.frame.origin.x)
@@ -100,6 +115,7 @@ class ViewController: UIViewController {
         fillLayer.fillColor = UIColor.white.cgColor
         fillLayer.opacity = 0.24
         viewToMask.layer.addSublayer(fillLayer)
+        layerArray.add(fillLayer)
     }
     
     public func platform() -> String {
@@ -125,6 +141,8 @@ class ViewController: UIViewController {
         generator.impactOccurred()
         
         if validateDelta() {
+            self.dragBtn.load()
+            
             AudioServicesPlaySystemSound(1305)
         }
         else {
@@ -180,6 +198,24 @@ class ViewController: UIViewController {
     }
     
     // MARK: - animation
+    func rotated() {
+        if(!self.dragBtn.frame.intersects(self.entryBtn.frame)) {
+            self.initialCenter = self.dragBtn.center
+        }
+
+        self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
+        
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            print("Landscape")
+            self.bgImageView.contentMode = .center
+        }
+        
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+            print("Portrait")
+            self.bgImageView.contentMode = .scaleAspectFill
+        }
+    }
+    
     func animateArrows() {
         self.arrowOne.alpha = 0.1
         self.arrowTwo.alpha = 0.1

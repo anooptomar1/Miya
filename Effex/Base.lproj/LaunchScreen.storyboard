@@ -21,23 +21,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Effex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOD-0F-3f8">
-                                <rect key="frame" x="136" y="300" width="102" height="66"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="OmC-F1-mNW">
+                                <rect key="frame" x="-30" y="-30" width="435" height="727"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" alpha="0.68000000715255737" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fk-uL-QbX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="OU4-rc-mFf">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Miya" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOD-0F-3f8">
+                                <rect key="frame" x="137" y="300" width="100" height="66"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2017 Steven Hurtado. All rights reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCb-s1-F30">
+                                <rect key="frame" x="8" y="639.5" width="359" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.25882352941176467" green="0.29411764705882354" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="OmC-F1-mNW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="0Jb-Yi-dJ9"/>
                             <constraint firstItem="IOD-0F-3f8" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="2PI-1e-2gZ"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="8fk-uL-QbX" secondAttribute="bottom" id="2tr-zT-Ycz"/>
+                            <constraint firstAttribute="trailing" secondItem="OmC-F1-mNW" secondAttribute="trailing" constant="-30" id="35O-gs-Oo4"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="rCb-s1-F30" secondAttribute="bottom" constant="8" id="4KM-XL-IJ9"/>
+                            <constraint firstItem="OmC-F1-mNW" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-30" id="5Sc-NP-eKU"/>
+                            <constraint firstItem="8fk-uL-QbX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="6l5-Ks-rKQ"/>
+                            <constraint firstAttribute="bottom" secondItem="OmC-F1-mNW" secondAttribute="bottom" constant="-30" id="EPb-Iu-7of"/>
+                            <constraint firstAttribute="trailing" secondItem="8fk-uL-QbX" secondAttribute="trailing" id="JBX-BD-cBu"/>
                             <constraint firstItem="IOD-0F-3f8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="TJC-ft-IhV"/>
+                            <constraint firstAttribute="trailing" secondItem="rCb-s1-F30" secondAttribute="trailing" constant="8" id="VSt-UN-Wpw"/>
+                            <constraint firstItem="OmC-F1-mNW" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-30" id="WoM-WA-5SY"/>
+                            <constraint firstItem="OmC-F1-mNW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Yq5-C5-zMm"/>
+                            <constraint firstItem="rCb-s1-F30" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="8" id="abj-kt-zuU"/>
+                            <constraint firstItem="8fk-uL-QbX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="vqe-wQ-HAc"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bg" width="5184" height="3456"/>
+    </resources>
 </document>
