@@ -48,6 +48,13 @@ extension UIImageView {
 
 extension UIColor
 {
+    //Miya colors
+    static var myMiyaSunset : UIColor
+    {
+        //F66957
+        return UIColor(red: 246.0/255.0, green: 105.0/255.0, blue: 87.0/255.0, alpha: 1)
+    }
+    
     //langua colors
     static var myMugiwaraYellow: UIColor
     {

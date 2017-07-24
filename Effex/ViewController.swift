@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var dragBtn: BlurButton!
     var initialCenter : CGPoint?
+    var collisionTransition : Bool = false
     
     @IBOutlet weak var titleButton: BlurButton!
     
@@ -142,12 +143,14 @@ class ViewController: UIViewController {
         
         if validateDelta() {
             self.dragBtn.load()
-            
+            collisionTransition = true
             AudioServicesPlaySystemSound(1305)
         }
         else {
             guard let bundle = Bundle.main.path(forResource: "audio/Pop", ofType: "aiff") else {return}
             let alertSound = URL(fileURLWithPath: bundle)
+            
+            collisionTransition = false
             
             try! audioPlayer = AVAudioPlayer(contentsOf: alertSound)
             audioPlayer.prepareToPlay()
@@ -199,20 +202,26 @@ class ViewController: UIViewController {
     
     // MARK: - animation
     func rotated() {
-        if(!self.dragBtn.frame.intersects(self.entryBtn.frame)) {
-            self.initialCenter = self.dragBtn.center
-        }
-
+        
         self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
+        
+        self.initialCenter = self.dragBtn.center
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
             self.bgImageView.contentMode = .center
+            self.dragBtn.indicator.color = UIColor.myMiyaSunset
         }
         
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             print("Portrait")
             self.bgImageView.contentMode = .scaleAspectFill
+            self.dragBtn.indicator.color = UIColor.lightGray
+        }
+        
+        if(collisionTransition) {
+            self.dragBtn.center = self.entryBtn.center
+            self.dragBtn.load()
         }
     }
     

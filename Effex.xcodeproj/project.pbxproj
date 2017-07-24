@@ -20,6 +20,7 @@
 		28A942971F23F266002E4320 /* BlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942961F23F266002E4320 /* BlurButton.swift */; };
 		28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942981F23F4C0002E4320 /* GTBackground.swift */; };
 		28A9429D1F243A87002E4320 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9429C1F243A87002E4320 /* audio */; };
+		D55DC235129168356F31C01C /* Pods_Effex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57BA8DA4914B16365418196 /* Pods_Effex.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,9 @@
 		28A942961F23F266002E4320 /* BlurButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurButton.swift; sourceTree = "<group>"; };
 		28A942981F23F4C0002E4320 /* GTBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTBackground.swift; sourceTree = "<group>"; };
 		28A9429C1F243A87002E4320 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
+		BE4B010CD193D97946F7CCAF /* Pods-Effex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Effex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Effex/Pods-Effex.release.xcconfig"; sourceTree = "<group>"; };
+		C57BA8DA4914B16365418196 /* Pods_Effex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Effex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F05689DAC2484836CD22C7F3 /* Pods-Effex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Effex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Effex/Pods-Effex.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D55DC235129168356F31C01C /* Pods_Effex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +61,8 @@
 			children = (
 				284BFE1B1F1D979100D77B07 /* Effex */,
 				284BFE1A1F1D979100D77B07 /* Products */,
+				64AD5E7FCB5606D19D46E219 /* Pods */,
+				B90036F84075631A320DCB2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +103,23 @@
 			name = web;
 			sourceTree = "<group>";
 		};
+		64AD5E7FCB5606D19D46E219 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F05689DAC2484836CD22C7F3 /* Pods-Effex.debug.xcconfig */,
+				BE4B010CD193D97946F7CCAF /* Pods-Effex.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B90036F84075631A320DCB2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C57BA8DA4914B16365418196 /* Pods_Effex.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 284BFE2B1F1D979100D77B07 /* Build configuration list for PBXNativeTarget "Effex" */;
 			buildPhases = (
+				08AFE9F723E7672657994BA3 /* [CP] Check Pods Manifest.lock */,
 				284BFE151F1D979100D77B07 /* Sources */,
 				284BFE161F1D979100D77B07 /* Frameworks */,
 				284BFE171F1D979100D77B07 /* Resources */,
+				224CF0C86146165463C24F66 /* [CP] Embed Pods Frameworks */,
+				4FB6A3297ACAA63803179AB8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -168,6 +195,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08AFE9F723E7672657994BA3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		224CF0C86146165463C24F66 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Effex/Pods-Effex-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FB6A3297ACAA63803179AB8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Effex/Pods-Effex-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		284BFE151F1D979100D77B07 /* Sources */ = {
@@ -299,6 +374,7 @@
 		};
 		284BFE2C1F1D979100D77B07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F05689DAC2484836CD22C7F3 /* Pods-Effex.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = E55B666VZ8;
@@ -312,6 +388,7 @@
 		};
 		284BFE2D1F1D979100D77B07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE4B010CD193D97946F7CCAF /* Pods-Effex.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = E55B666VZ8;

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class BlurButton: UIButton {
 
@@ -17,6 +18,7 @@ class BlurButton: UIButton {
         // Drawing code
     }
     */
+    var indicator : NVActivityIndicatorView!
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,6 +27,9 @@ class BlurButton: UIButton {
         self.layer.borderColor = UIColor.clear.cgColor
         self.layer.cornerRadius = self.frame.width/2
         self.clipsToBounds = true
+        
+        indicator = NVActivityIndicatorView(frame: CGRect(x: 8, y: 8, width: self.frame.width-16, height: self.frame.height-16), type: .orbit, color: UIColor.myMiyaSunset, padding: 0)
+        self.addSubview(indicator)
     }
     
     func updateMaskForView(text: String, invert : Bool = true) {
@@ -34,7 +39,9 @@ class BlurButton: UIButton {
     
     func load() {
         self.layer.mask?.removeFromSuperlayer()
-        self.backgroundColor = UIColor.white
+
+        self.bringSubview(toFront: indicator)
+        indicator.startAnimating()
     }
     
     func clearTextButton(button: UIButton, title: String, color: UIColor) {
