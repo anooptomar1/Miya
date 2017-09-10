@@ -17,9 +17,15 @@
 		284BFE331F1DA42700D77B07 /* parallax.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE321F1DA42700D77B07 /* parallax.min.js */; };
 		285958491F20266700A3DA89 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285958481F20266700A3DA89 /* Util.swift */; };
 		2859584C1F20335400A3DA89 /* parallax.css in Resources */ = {isa = PBXBuildFile; fileRef = 2859584B1F20335400A3DA89 /* parallax.css */; };
+		288C50FD1F6365E100CDC5D5 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 28CD318E1F5F40AC00683DB6 /* art.scnassets */; };
 		28A942971F23F266002E4320 /* BlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942961F23F266002E4320 /* BlurButton.swift */; };
 		28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942981F23F4C0002E4320 /* GTBackground.swift */; };
 		28A9429D1F243A87002E4320 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9429C1F243A87002E4320 /* audio */; };
+		28CD318D1F5F34B000683DB6 /* ARSCNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CD318C1F5F34B000683DB6 /* ARSCNViewController.swift */; };
+		28FEAF501F3AA3D3002EB5BC /* Animators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */; };
+		28FEAF521F3AA457002EB5BC /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */; };
+		28FEAF541F3B7F6B002EB5BC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */; };
+		28FEAF561F3BAD9A002EB5BC /* ModalAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */; };
 		D55DC235129168356F31C01C /* Pods_Effex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C57BA8DA4914B16365418196 /* Pods_Effex.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +45,12 @@
 		28A942961F23F266002E4320 /* BlurButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurButton.swift; sourceTree = "<group>"; };
 		28A942981F23F4C0002E4320 /* GTBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTBackground.swift; sourceTree = "<group>"; };
 		28A9429C1F243A87002E4320 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
+		28CD318C1F5F34B000683DB6 /* ARSCNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ARSCNViewController.swift; path = "../../AR Test/AR Test/ARSCNViewController.swift"; sourceTree = "<group>"; };
+		28CD318E1F5F40AC00683DB6 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = "../../AR Test/AR Test/art.scnassets"; sourceTree = "<group>"; };
+		28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animators.swift; sourceTree = "<group>"; };
+		28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
+		28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalAuthViewController.swift; sourceTree = "<group>"; };
 		BE4B010CD193D97946F7CCAF /* Pods-Effex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Effex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Effex/Pods-Effex.release.xcconfig"; sourceTree = "<group>"; };
 		C57BA8DA4914B16365418196 /* Pods_Effex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Effex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05689DAC2484836CD22C7F3 /* Pods-Effex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Effex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Effex/Pods-Effex.debug.xcconfig"; sourceTree = "<group>"; };
@@ -77,15 +89,14 @@
 		284BFE1B1F1D979100D77B07 /* Effex */ = {
 			isa = PBXGroup;
 			children = (
-				284BFE1C1F1D979100D77B07 /* AppDelegate.swift */,
-				285958481F20266700A3DA89 /* Util.swift */,
-				28A942981F23F4C0002E4320 /* GTBackground.swift */,
-				28A942961F23F266002E4320 /* BlurButton.swift */,
-				284BFE1E1F1D979100D77B07 /* ViewController.swift */,
+				287A16B61F3A9CB4001D30C2 /* CustomResources */,
+				287A16B51F3A9CAA001D30C2 /* Util */,
+				287A16B41F3A9C97001D30C2 /* ViewControllers */,
 				2859584A1F20332D00A3DA89 /* web */,
 				284BFE301F1DA3BF00D77B07 /* images */,
 				28A9429C1F243A87002E4320 /* audio */,
 				284BFE201F1D979100D77B07 /* Main.storyboard */,
+				28CD318E1F5F40AC00683DB6 /* art.scnassets */,
 				284BFE231F1D979100D77B07 /* Assets.xcassets */,
 				284BFE251F1D979100D77B07 /* LaunchScreen.storyboard */,
 				284BFE281F1D979100D77B07 /* Info.plist */,
@@ -101,6 +112,37 @@
 				2859584B1F20335400A3DA89 /* parallax.css */,
 			);
 			name = web;
+			sourceTree = "<group>";
+		};
+		287A16B41F3A9C97001D30C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				284BFE1E1F1D979100D77B07 /* ViewController.swift */,
+				28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */,
+				28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */,
+				28CD318C1F5F34B000683DB6 /* ARSCNViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		287A16B51F3A9CAA001D30C2 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				284BFE1C1F1D979100D77B07 /* AppDelegate.swift */,
+				285958481F20266700A3DA89 /* Util.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		287A16B61F3A9CB4001D30C2 /* CustomResources */ = {
+			isa = PBXGroup;
+			children = (
+				28A942981F23F4C0002E4320 /* GTBackground.swift */,
+				28A942961F23F266002E4320 /* BlurButton.swift */,
+				28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */,
+				28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */,
+			);
+			name = CustomResources;
 			sourceTree = "<group>";
 		};
 		64AD5E7FCB5606D19D46E219 /* Pods */ = {
@@ -156,6 +198,7 @@
 					284BFE181F1D979100D77B07 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = E55B666VZ8;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -184,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				284BFE311F1DA3BF00D77B07 /* images in Resources */,
+				288C50FD1F6365E100CDC5D5 /* art.scnassets in Resources */,
 				284BFE271F1D979100D77B07 /* LaunchScreen.storyboard in Resources */,
 				284BFE2F1F1D9FFF00D77B07 /* parallax.html in Resources */,
 				2859584C1F20335400A3DA89 /* parallax.css in Resources */,
@@ -249,10 +293,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28CD318D1F5F34B000683DB6 /* ARSCNViewController.swift in Sources */,
+				28FEAF501F3AA3D3002EB5BC /* Animators.swift in Sources */,
+				28FEAF561F3BAD9A002EB5BC /* ModalAuthViewController.swift in Sources */,
 				28A942971F23F266002E4320 /* BlurButton.swift in Sources */,
 				284BFE1F1F1D979100D77B07 /* ViewController.swift in Sources */,
 				285958491F20266700A3DA89 /* Util.swift in Sources */,
+				28FEAF541F3B7F6B002EB5BC /* AuthViewController.swift in Sources */,
 				28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */,
+				28FEAF521F3AA457002EB5BC /* NavigationControllerDelegate.swift in Sources */,
 				284BFE1D1F1D979100D77B07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -364,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -379,10 +428,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = E55B666VZ8;
 				INFOPLIST_FILE = Effex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Effex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Miya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -393,10 +444,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = E55B666VZ8;
 				INFOPLIST_FILE = Effex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Effex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Miya;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

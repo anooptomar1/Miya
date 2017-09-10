@@ -57,7 +57,7 @@ class GTBackground : UIView {
         timer = Timer.scheduledTimer(timeInterval: self.speed, target: self, selector: #selector(movement), userInfo: nil, repeats: true)
     }
     
-    func movement()
+    @objc func movement()
     {
         //gradient animation
         backgroundAnimation(r1: red1, g1: green1, b1: blue1)

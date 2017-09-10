@@ -13,6 +13,8 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+    let transition = DotAnimator()
+    
     //parallax images
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var flareDotsImageView: UIImageView!
@@ -49,19 +51,20 @@ class ViewController: UIViewController {
     
         self.initialCenter = self.dragBtn.center
         
-        self.titleButton.addBlurEffect()
+        self.titleButton.addBlurEffect(withStyle: .extraLight)
         self.titleButton.updateMaskForView(text: "Miya")
         self.titleButton.isUserInteractionEnabled = false
         
-        self.dragBtn.addBlurEffect()
+        self.dragBtn.addBlurEffect(withStyle: .extraLight)
         self.dragBtn.updateMaskForView(text: "Drag Me")
         
-        self.entryBtn.addBlurEffect()
+        self.entryBtn.addBlurEffect(withStyle: .extraLight)
         self.entryBtn.maskBlur()
         
         self.dragBtn.addTarget(self, action: #selector(wasDragged(btn:event:)), for: UIControlEvents.touchDragInside)
         self.dragBtn.addTarget(self, action: #selector(beganDrag(btn:event:)), for: UIControlEvents.touchDown)
         self.dragBtn.addTarget(self, action: #selector(exitDrag(btn:event:)), for: UIControlEvents.touchUpInside)
+        self.dragBtn.indicator.color = UIColor.lightGray
         
         self.imageWidth = self.bgImageView.frame.width
         self.imageHeight = self.bgImageView.frame.width
@@ -97,8 +100,8 @@ class ViewController: UIViewController {
         
         let radius = maskRect.size.width/2 + 2
         let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: self.switchBtnContainer.bounds.size.width, height: self.switchBtnContainer.bounds.size.height), cornerRadius: 0)
-        print(self.dragBtn.frame.origin.x)
-        print(self.dragBtn.frame.origin.y - viewToMask.frame.origin.y)
+//        print(self.dragBtn.frame.origin.x)
+//        print(self.dragBtn.frame.origin.y - viewToMask.frame.origin.y)
         var circleX = self.dragBtn.frame.origin.x - 2
         let circleY = abs(self.dragBtn.frame.origin.y - viewToMask.frame.origin.y) - 2
         var circlePath = UIBezierPath(roundedRect: CGRect(x: circleX, y: circleY, width: 2 * radius, height: 2 * radius), cornerRadius: radius)
@@ -129,14 +132,14 @@ class ViewController: UIViewController {
         return ["iPhone9,1", "iPhone9,3", "iPhone9,2", "iPhone9,4"].contains(platform())
     }
     
-    func beganDrag(btn : UIButton, event :UIEvent)
+    @objc func beganDrag(btn : UIButton, event :UIEvent)
     {
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         generator.impactOccurred()
         AudioServicesPlaySystemSound(1306)
     }
     
-    func exitDrag(btn : UIButton, event :UIEvent)
+    @objc func exitDrag(btn : UIButton, event :UIEvent)
     {
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         generator.impactOccurred()
@@ -145,6 +148,8 @@ class ViewController: UIViewController {
             self.dragBtn.load()
             collisionTransition = true
             AudioServicesPlaySystemSound(1305)
+            
+            self.performSegue(withIdentifier: "EntranceSegue", sender: self)
         }
         else {
             guard let bundle = Bundle.main.path(forResource: "audio/Pop", ofType: "aiff") else {return}
@@ -176,7 +181,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func wasDragged (btn : UIButton, event :UIEvent)
+    @objc func wasDragged (btn : UIButton, event :UIEvent)
     {
         print("Dragging")
         guard let touch = event.touches(for: btn)?.first else {return}
@@ -201,7 +206,7 @@ class ViewController: UIViewController {
     }
     
     // MARK: - animation
-    func rotated() {
+    @objc func rotated() {
         
         self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
         
@@ -282,6 +287,16 @@ class ViewController: UIViewController {
         
         webView.loadRequest(request)
     }
+    
+    //MARK: - NAVIGATION
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let dest = segue.destination
+//        
+//        dest.transitioningDelegate = self
+//        dest.modalPresentationStyle = .custom
+    }
+    
 }
 
 extension ViewController: UIWebViewDelegate {
@@ -298,6 +313,38 @@ extension ViewController: UIWebViewDelegate {
         UIView.animate(withDuration: 1.48) {
             webView.alpha = 1.0
         }
+    }
+}
+
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = view.center
+        if let color = self.titleButton.backgroundColor {
+            transition.circleColor = color
+        }
+        else {
+            transition.circleColor = .red
+        }
+        
+        return transition
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = view.center
+        
+        print(self.titleButton.center)
+        print(view.center)
+        
+        if let color = self.titleButton.backgroundColor {
+            transition.circleColor = color
+        }
+        else {
+            transition.circleColor = .red
+        }
+        
+        return transition
     }
 }
 

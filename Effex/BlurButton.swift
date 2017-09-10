@@ -49,20 +49,22 @@ class BlurButton: UIButton {
         button.titleLabel?.backgroundColor = UIColor.clear
         button.setTitleColor(UIColor.clear, for: .normal)
         button.setTitle(title, for: [])
+        
+        guard let titleLabel = button.titleLabel else {return}
         let buttonSize: CGSize = button.bounds.size
-        let font: UIFont = button.titleLabel!.font
-        let attribs: [String : AnyObject] = [NSFontAttributeName: button.titleLabel!.font]
-        let textSize: CGSize = title.size(attributes: attribs)
+        let font: UIFont = titleLabel.font
+        let attribs: [NSAttributedStringKey : AnyObject] = [NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): titleLabel.font]
+        let textSize: CGSize = title.size(withAttributes: attribs)
         UIGraphicsBeginImageContextWithOptions(buttonSize, false, UIScreen.main.scale)
-        let ctx: CGContext = UIGraphicsGetCurrentContext()!
+        guard let ctx: CGContext = UIGraphicsGetCurrentContext() else{return}
         ctx.setFillColor(UIColor.white.cgColor)
         let center: CGPoint = CGPoint(x: buttonSize.width / 2 - textSize.width / 2, y: buttonSize.height / 2 - textSize.height / 2)
         let path: UIBezierPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: buttonSize.width, height: buttonSize.height))
         ctx.addPath(path.cgPath)
         ctx.fillPath()
         ctx.setBlendMode(.destinationOut)
-        title.draw(at: center, withAttributes: [NSFontAttributeName: font])
-        let viewImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        title.draw(at: center, withAttributes: [NSAttributedStringKey.font: font])
+        guard let viewImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() else {return}
         UIGraphicsEndImageContext()
         let maskLayer: CALayer = CALayer()
         maskLayer.contents = ((viewImage.cgImage) as AnyObject)
@@ -74,9 +76,9 @@ class BlurButton: UIButton {
         self.mask = self.titleLabel
     }
     
-    func addBlurEffect()
+    func addBlurEffect(withStyle style: UIBlurEffectStyle)
     {
-        let blur = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        let blur = UIVisualEffectView(effect: UIBlurEffect(style: style))
         blur.frame = self.bounds
         blur.isUserInteractionEnabled = false
         self.insertSubview(blur, at: 0)
