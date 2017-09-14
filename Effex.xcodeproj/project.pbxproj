@@ -22,6 +22,10 @@
 		28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942981F23F4C0002E4320 /* GTBackground.swift */; };
 		28A9429D1F243A87002E4320 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9429C1F243A87002E4320 /* audio */; };
 		28CD318D1F5F34B000683DB6 /* ARSCNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CD318C1F5F34B000683DB6 /* ARSCNViewController.swift */; };
+		28FC0A2B1F6B153B0046DBE7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A291F6B153B0046DBE7 /* spark.png */; };
+		28FC0A2F1F6B19A30046DBE7 /* jetEmission.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */; };
+		28FC0A301F6B19A30046DBE7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A2E1F6B19A30046DBE7 /* bokeh.png */; };
+		28FC0A321F6B22F00046DBE7 /* Miya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC0A311F6B22F00046DBE7 /* Miya.swift */; };
 		28FEAF501F3AA3D3002EB5BC /* Animators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */; };
 		28FEAF521F3AA457002EB5BC /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */; };
 		28FEAF541F3B7F6B002EB5BC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */; };
@@ -47,6 +51,10 @@
 		28A9429C1F243A87002E4320 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
 		28CD318C1F5F34B000683DB6 /* ARSCNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ARSCNViewController.swift; path = "../../AR Test/AR Test/ARSCNViewController.swift"; sourceTree = "<group>"; };
 		28CD318E1F5F40AC00683DB6 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = "../../AR Test/AR Test/art.scnassets"; sourceTree = "<group>"; };
+		28FC0A291F6B153B0046DBE7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = jetEmission.scnp; sourceTree = "<group>"; };
+		28FC0A2E1F6B19A30046DBE7 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		28FC0A311F6B22F00046DBE7 /* Miya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miya.swift; sourceTree = "<group>"; };
 		28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animators.swift; sourceTree = "<group>"; };
 		28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -141,8 +149,20 @@
 				28A942961F23F266002E4320 /* BlurButton.swift */,
 				28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */,
 				28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */,
+				28FC0A311F6B22F00046DBE7 /* Miya.swift */,
+				28B71E461F6B0FBF006D24D3 /* Particles */,
 			);
 			name = CustomResources;
+			sourceTree = "<group>";
+		};
+		28B71E461F6B0FBF006D24D3 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */,
+				28FC0A2E1F6B19A30046DBE7 /* bokeh.png */,
+				28FC0A291F6B153B0046DBE7 /* spark.png */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 		64AD5E7FCB5606D19D46E219 /* Pods */ = {
@@ -226,10 +246,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28FC0A2B1F6B153B0046DBE7 /* spark.png in Resources */,
 				284BFE311F1DA3BF00D77B07 /* images in Resources */,
 				288C50FD1F6365E100CDC5D5 /* art.scnassets in Resources */,
 				284BFE271F1D979100D77B07 /* LaunchScreen.storyboard in Resources */,
 				284BFE2F1F1D9FFF00D77B07 /* parallax.html in Resources */,
+				28FC0A301F6B19A30046DBE7 /* bokeh.png in Resources */,
+				28FC0A2F1F6B19A30046DBE7 /* jetEmission.scnp in Resources */,
 				2859584C1F20335400A3DA89 /* parallax.css in Resources */,
 				284BFE331F1DA42700D77B07 /* parallax.min.js in Resources */,
 				284BFE241F1D979100D77B07 /* Assets.xcassets in Resources */,
@@ -298,6 +321,7 @@
 				28FEAF561F3BAD9A002EB5BC /* ModalAuthViewController.swift in Sources */,
 				28A942971F23F266002E4320 /* BlurButton.swift in Sources */,
 				284BFE1F1F1D979100D77B07 /* ViewController.swift in Sources */,
+				28FC0A321F6B22F00046DBE7 /* Miya.swift in Sources */,
 				285958491F20266700A3DA89 /* Util.swift in Sources */,
 				28FEAF541F3B7F6B002EB5BC /* AuthViewController.swift in Sources */,
 				28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */,
