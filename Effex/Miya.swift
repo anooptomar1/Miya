@@ -190,9 +190,15 @@ class Miya : NSObject {
                     }
                     break;
                 }
-                vP.geometry?.firstMaterial?.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, 1, 1), 0, 0, 0)
-                vP.geometry?.firstMaterial?.emission.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, 1, 1), 0, 0, 0)
-
+                
+                vP.geometry?.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(-1, -1, 1)
+                vP.geometry?.firstMaterial?.diffuse.wrapT = SCNWrapMode.repeat
+                vP.geometry?.firstMaterial?.diffuse.wrapS = SCNWrapMode.repeat
+                
+                vP.geometry?.firstMaterial?.emission.contentsTransform = SCNMatrix4MakeScale(-1, -1, 1)
+                vP.geometry?.firstMaterial?.emission.wrapT = SCNWrapMode.repeat
+                vP.geometry?.firstMaterial?.emission.wrapS = SCNWrapMode.repeat
+                
                 keyframe += 1
                 SCNTransaction.commit()
             }
