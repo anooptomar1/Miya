@@ -16,14 +16,23 @@ class Miya : NSObject {
     var bodyLining : SCNNode?
     var jet : SCNNode?
     var nodes : [SCNNode?] = []
+    var parent : SCNNode?
+    var timer : Timer?
     
     init(body: SCNNode, viewPort: SCNNode, bodyLining: SCNNode, jet: SCNNode) {
+        super.init()
         self.body = body
         self.viewPort = viewPort
         self.bodyLining = bodyLining
         self.jet = jet
         
         self.nodes = [self.body, self.viewPort, self.bodyLining, self.jet]
+        self.makeParent(parent: self.body)
+    }
+    
+    private func makeParent(parent: SCNNode?)
+    {
+        self.parent = parent
     }
     
     func miyaParticleSetUp()
@@ -38,11 +47,6 @@ class Miya : NSObject {
     
     func miyaHoverAnimation()
     {
-//        guard let vP = self.viewPort else {return}
-//        guard let jet = self.jet else {return}
-//        guard let body = self.body else {return}
-//        guard let bL = self.bodyLining else {return}
-//
         let moveUp = SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1)
         moveUp.timingMode = .easeInEaseOut;
         let moveDown = SCNAction.moveBy(x: 0, y: -1, z: 0, duration: 1)
@@ -50,12 +54,11 @@ class Miya : NSObject {
         let moveSequence = SCNAction.sequence([moveUp,moveDown])
         let moveLoop = SCNAction.repeatForever(moveSequence)
         
-        for node in nodes {
-            if let node = node
-            {
-                node.runAction(moveLoop)
-            }
+        if let node = self.parent
+        {
+            node.runAction(moveLoop)
         }
+        
 //        jet.runAction(moveLoop)
 //        body.runAction(moveLoop)
 //        bL.runAction(moveLoop)
@@ -63,10 +66,11 @@ class Miya : NSObject {
     
     func viewPortAnimation()
     {
+        self.timer?.invalidate()
         if let vP = self.viewPort
         {
             var keyframe = 0
-            _ = Timer.scheduledTimer(withTimeInterval: 0.06, repeats: true) { (Timer) in
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.06, repeats: true) { (Timer) in
                 
                 SCNTransaction.begin()
                 SCNTransaction.animationDuration = 0.06
@@ -116,6 +120,79 @@ class Miya : NSObject {
                     }
                     break;
                 }
+                keyframe += 1
+                SCNTransaction.commit()
+            }
+        }
+    }
+    
+    func loadingState()
+    {
+        self.timer?.invalidate()
+        if let vP = self.viewPort
+        {
+            var keyframe = 0
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.06, repeats: true) { (Timer) in
+                
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.06
+                
+                switch(keyframe) {
+                case 0:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0001")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0001")
+                    break;
+                case 1:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0003")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0003")
+                    break;
+                case 2:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0005")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0005")
+                    break;
+                case 3:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0007")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0007")
+                    break;
+                case 4:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0009")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0009")
+                    break;
+                case 5:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0011")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0011")
+                    break;
+                case 6:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0013")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0013")
+                    break;
+                case 7:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0015")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0015")
+                    break;
+                case 8:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0017")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0017")
+                    break;
+                case 9:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0019")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0019")
+                    break;
+                case 10:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0021")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0021")
+                    break;
+                default:
+                    vP.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "loader0023")
+                    vP.geometry?.firstMaterial?.emission.contents = UIImage(named: "loader0023")
+                    if(keyframe == 24) {
+                        keyframe = 0
+                    }
+                    break;
+                }
+                vP.geometry?.firstMaterial?.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, 1, 1), 0, 0, 0)
+                vP.geometry?.firstMaterial?.emission.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, 1, 1), 0, 0, 0)
+
                 keyframe += 1
                 SCNTransaction.commit()
             }
