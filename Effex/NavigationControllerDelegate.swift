@@ -23,7 +23,7 @@ class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate {
                 let dotTransition = DotAnimator()
                 
                 dotTransition.transitionMode = .present
-                dotTransition.startingPoint = source.titleButton.center
+                dotTransition.startingPoint = source.titleLogo.center
                 
                 if let color = dest.view.backgroundColor {
                     dotTransition.circleColor = color

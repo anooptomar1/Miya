@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SceneKit
 
+class ArrowView : UIImageView {}
 extension UIImageView {
     func setUpParallax(rate: Double) {
         //three rates max

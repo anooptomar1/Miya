@@ -106,17 +106,10 @@
                                     <constraint firstAttribute="width" constant="24" id="OA0-q9-SQA"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdR-zj-1jB" customClass="BlurButton" customModule="Effex" customModuleProvider="target">
-                                <rect key="frame" x="125" y="271" width="125" height="125"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="D6y-zj-zn0"/>
-                                    <constraint firstAttribute="height" constant="125" id="lKA-JF-CbY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="48"/>
-                                <state key="normal" title="Miya">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Miya-Circle" translatesAutoresizingMaskIntoConstraints="NO" id="yHs-Dh-jmd">
+                                <rect key="frame" x="126" y="271" width="125" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.25882352939999997" green="0.29411764709999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -128,7 +121,6 @@
                             <constraint firstItem="EcA-q8-13J" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-30" id="7q7-Sf-3k0"/>
                             <constraint firstAttribute="trailing" secondItem="EcA-q8-13J" secondAttribute="trailing" constant="-30" id="9HI-qs-u3f"/>
                             <constraint firstItem="Jmy-j1-Xga" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-30" id="AYj-Ae-DaU"/>
-                            <constraint firstItem="vdR-zj-1jB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AzL-HK-guM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ESR-fx-xds" secondAttribute="bottom" constant="50" id="ERB-Ld-KGa"/>
                             <constraint firstAttribute="trailing" secondItem="fwT-UC-nc1" secondAttribute="trailing" id="G28-Gy-0SD"/>
                             <constraint firstItem="DJl-0K-kSp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JgS-HU-g8W"/>
@@ -149,7 +141,6 @@
                             <constraint firstItem="EcA-q8-13J" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-30" id="tUh-oy-gmj"/>
                             <constraint firstAttribute="trailing" secondItem="aF5-W7-uG1" secondAttribute="trailing" id="tfJ-WX-oFb"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="joT-mB-DWL" secondAttribute="bottom" constant="8" id="xey-pl-pXV"/>
-                            <constraint firstItem="vdR-zj-1jB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="y4x-mU-jhc"/>
                             <constraint firstAttribute="trailing" secondItem="joT-mB-DWL" secondAttribute="trailing" constant="16" id="yYj-oH-rSt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fwT-UC-nc1" secondAttribute="bottom" id="zFl-kf-a0l"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="biR-w2-cX4" secondAttribute="bottom" constant="8" id="zap-Sb-4f3"/>
@@ -167,7 +158,7 @@
                         <outlet property="flareImageView" destination="Jmy-j1-Xga" id="UJo-58-Ts5"/>
                         <outlet property="gtLabel" destination="DJl-0K-kSp" id="jAS-lZ-ss1"/>
                         <outlet property="switchBtnContainer" destination="fwT-UC-nc1" id="gRt-zE-p7p"/>
-                        <outlet property="titleButton" destination="vdR-zj-1jB" id="1jg-wP-E9O"/>
+                        <outlet property="titleLogo" destination="yHs-Dh-jmd" id="rWW-K4-KTD"/>
                         <segue destination="UHf-Dw-x18" kind="show" identifier="EntranceSegue" id="teg-eK-KSH"/>
                     </connections>
                 </viewController>
@@ -373,6 +364,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Miya-Circle" width="2162" height="2162"/>
         <image name="bg" width="5184" height="3456"/>
         <image name="flare1" width="6330" height="4500"/>
         <image name="flare2" width="2100" height="2340"/>

@@ -14,6 +14,9 @@ class ARSCNViewController : UIViewController
 {
     var miya : Miya?
     var sceneView : SCNView?
+    
+    var boxes : [Box]?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -58,6 +61,62 @@ class ARSCNViewController : UIViewController
         recog.numberOfTapsRequired = 1
         recog.numberOfTouchesRequired = 1
         sceneView.gestureRecognizers?.append(recog)
+        
+        //collection view set up
+//        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 250, height: 250))
+    }
+    
+    func checkForBox()
+    {
+        //enter loading state
+        self.miya?.loadingState()
+        self.view.isUserInteractionEnabled = false
+        
+        //make request to server to compare locations of Box-s versus Miya's location
+            //pass Miya's calculated 3D position in real space
+        
+            //if there are any number of [Box]
+                //indicate actions and their states
+            //error
+                //no boxes || no connection || other
+                //notify user with error bubble
+        
+            //end loading state
+        
+        // sudo data for boxes
+        var dict : NSDictionary = ["result" : [ ["id" : "456"],
+                                        ["actions" :
+                                            [["action" : "Lamp 1"],
+                                             ["triggered" : 0]]],
+                                        ["position" :
+                                            [["lat" : 1.1],
+                                             ["long" : 2.2],
+                                             ["z" : 5.0]]]]]
+        let box : Box = Box(dict: dict)
+        
+        dict = ["result" : [ ["id" : "457"],
+                    ["actions" :
+                        [["action" : "Radio 2"],
+                        ["triggered" : 0]]],
+                    ["position" :
+                        [["lat" : 1.1],
+                        ["long" : 2.2],
+                        ["z" : 5.0]]]]]
+
+        let box2 : Box = Box(dict: dict)
+        let boxes : [Box] = [box, box2]
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 2.4, repeats: false, block: { (timer) in
+            self.miya?.viewPortAnimation()
+            self.view.isUserInteractionEnabled = true
+            self.boxes = boxes
+            
+            let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 250, height: 250))
+            let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: UICollectionViewLayout())
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            self.view.addSubview(collectionView)
+        })
     }
     
     func CGPointToSCNVector3(view: SCNView, depth: Float, point: CGPoint) -> SCNVector3 {
@@ -89,7 +148,7 @@ class ARSCNViewController : UIViewController
                 for child in children
                 {
                     if child == node {
-                        miya?.loadingState()
+                        checkForBox()
                         break
                     }
                 }
@@ -108,4 +167,32 @@ class ARSCNViewController : UIViewController
             }
         }
     }
+}
+
+extension ARSCNViewController: UICollectionViewDelegate, UICollectionViewDataSource
+{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.boxes?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.cellForItem(at: indexPath) else {return UICollectionViewCell()}
+        
+        if let box = self.boxes?[indexPath.row] {
+            let action = box.actions?[0]
+            
+            let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 100, height: 100))
+            
+            if let actionText = action?.action
+            {
+                label.text = actionText
+            }
+            
+            cell.addSubview(label)
+        }
+        
+        return cell
+    }
+    
+    
 }

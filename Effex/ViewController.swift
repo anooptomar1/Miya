@@ -15,6 +15,8 @@ class ViewController: UIViewController {
 
     let transition = DotAnimator()
     
+    @IBOutlet weak var titleLogo: UIImageView!
+    
     //parallax images
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var flareDotsImageView: UIImageView!
@@ -28,17 +30,17 @@ class ViewController: UIViewController {
     var initialCenter : CGPoint?
     var collisionTransition : Bool = false
     
-    @IBOutlet weak var titleButton: BlurButton!
-    
     @IBOutlet weak var entryBtn: BlurButton!
     
     @IBOutlet weak var switchBtnContainer: UIView!
     var layerArray = NSMutableArray()
     
     //arrows
-    @IBOutlet weak var arrowOne: UIImageView!
-    @IBOutlet weak var arrowTwo: UIImageView!
-    @IBOutlet weak var arrowThree: UIImageView!
+    
+    @IBOutlet weak var arrowOne: ArrowView!
+    @IBOutlet weak var arrowTwo: ArrowView!
+    @IBOutlet weak var arrowThree: ArrowView!
+    var switchChildren = [UIView]()
     
     var imageWidth : CGFloat?
     var imageHeight : CGFloat?
@@ -51,9 +53,64 @@ class ViewController: UIViewController {
     
         self.initialCenter = self.dragBtn.center
         
-        self.titleButton.addBlurEffect(withStyle: .extraLight)
-        self.titleButton.updateMaskForView(text: "Miya")
-        self.titleButton.isUserInteractionEnabled = false
+        switchChildren.append(arrowOne)
+        switchChildren.append(arrowTwo)
+        switchChildren.append(arrowThree)
+        switchChildren.append(self.dragBtn)
+        switchChildren.append(self.entryBtn)
+        
+        //Parallax set up
+        self.bgImageView.setUpParallax(rate: 3.0)
+        self.flareDotsImageView.setUpParallax(rate: 2.0)
+        self.flareImageView.setUpParallax(rate: 1.0)
+        
+        self.flareDotsImageView.alpha = 0.0
+        self.flareImageView.alpha = 0.0
+        self.switchBtnContainer.alpha = 0.0
+        
+        for child in switchChildren
+        {
+            child.alpha = 0.0
+        }
+            
+        _ = Timer.scheduledTimer(withTimeInterval: 2.4, repeats: false, block: { (begin) in
+            
+            self.imageWidth = self.bgImageView.frame.width
+            self.imageHeight = self.bgImageView.frame.width
+            
+            self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
+            
+            UIView.animate(withDuration: 2.4, animations: {
+                self.flareDotsImageView.alpha = 0.84
+                self.flareImageView.alpha = 0.48
+                self.switchBtnContainer.alpha = 1.0
+                
+                for child in self.switchChildren
+                {
+                    if let arrow = child as? ArrowView
+                    {
+                        arrow.alpha = 0.1
+                    }
+                    else
+                    {
+                        child.alpha = 1.0
+                    }
+                }
+            }, completion: { (end) in
+                self.flareDotsImageView.setUpAnimation(quiver: 6.0, maxAlpha: 0.84, minAlpha: 0.24)
+                self.flareImageView.setUpAnimation(quiver: 6.0, maxAlpha: 0.48, minAlpha: 1.0)
+                _ = Timer.scheduledTimer(withTimeInterval: 4.8, repeats: true) { (timer: Timer) in
+                    self.animateArrows()
+                }
+                
+                self.animateFlares()
+                _ = Timer.scheduledTimer(withTimeInterval: 48.0, repeats: true) { (timer: Timer) in
+                    self.animateFlares()
+                }
+                
+                
+            })
+        })
         
         self.dragBtn.addBlurEffect(withStyle: .extraLight)
         self.dragBtn.updateMaskForView(text: "Drag Me")
@@ -65,26 +122,9 @@ class ViewController: UIViewController {
         self.dragBtn.addTarget(self, action: #selector(beganDrag(btn:event:)), for: UIControlEvents.touchDown)
         self.dragBtn.addTarget(self, action: #selector(exitDrag(btn:event:)), for: UIControlEvents.touchUpInside)
         self.dragBtn.indicator.color = UIColor.lightGray
-        
-        self.imageWidth = self.bgImageView.frame.width
-        self.imageHeight = self.bgImageView.frame.width
-        
-        self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 4.8, repeats: true) { (timer: Timer) in
-            self.animateArrows()
-        }
 
         //orienation
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-
-        //Parallax set up
-        self.bgImageView.setUpParallax(rate: 3.0)
-        self.flareDotsImageView.setUpParallax(rate: 2.0)
-        self.flareImageView.setUpParallax(rate: 1.0)
-        
-        self.flareDotsImageView.setUpAnimation(quiver: 6.0, maxAlpha: 0.84, minAlpha: 0.24)
-        self.flareImageView.setUpAnimation(quiver: 6.0, maxAlpha: 0.48, minAlpha: 1.0)
     }
     
     // MARK: - button options
@@ -221,7 +261,7 @@ class ViewController: UIViewController {
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             print("Portrait")
             self.bgImageView.contentMode = .scaleAspectFill
-            self.dragBtn.indicator.color = UIColor.lightGray
+            self.dragBtn.indicator.color = UIColor.myOuterSpaceBlack
         }
         
         if(collisionTransition) {
@@ -255,6 +295,18 @@ class ViewController: UIViewController {
             UIView.animate(withDuration: 0.64, animations: {
                 self.arrowThree.alpha = 0.1
             })
+        }
+    }
+    
+    func animateFlares() {
+        UIView.animate(withDuration: 24.0, animations: {
+            self.flareDotsImageView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/12)
+            self.flareImageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi/4)
+        }) { (finish: Bool) in
+            UIView.animate(withDuration: 24.0, animations: {
+                self.flareDotsImageView.transform = CGAffineTransform.identity
+                self.flareImageView.transform = CGAffineTransform.identity
+            }, completion: nil)
         }
     }
     
@@ -320,12 +372,8 @@ extension ViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
         transition.startingPoint = view.center
-        if let color = self.titleButton.backgroundColor {
-            transition.circleColor = color
-        }
-        else {
-            transition.circleColor = .red
-        }
+        
+        transition.circleColor = UIColor.white
         
         return transition
     }
@@ -334,15 +382,9 @@ extension ViewController: UIViewControllerTransitioningDelegate {
         transition.transitionMode = .present
         transition.startingPoint = view.center
         
-        print(self.titleButton.center)
         print(view.center)
         
-        if let color = self.titleButton.backgroundColor {
-            transition.circleColor = color
-        }
-        else {
-            transition.circleColor = .red
-        }
+        transition.circleColor = UIColor.white
         
         return transition
     }

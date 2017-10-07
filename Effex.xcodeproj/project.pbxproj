@@ -17,6 +17,8 @@
 		284BFE331F1DA42700D77B07 /* parallax.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE321F1DA42700D77B07 /* parallax.min.js */; };
 		285958491F20266700A3DA89 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285958481F20266700A3DA89 /* Util.swift */; };
 		2859584C1F20335400A3DA89 /* parallax.css in Resources */ = {isa = PBXBuildFile; fileRef = 2859584B1F20335400A3DA89 /* parallax.css */; };
+		286383AC1F88081200D2120C /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286383AB1F88081200D2120C /* Box.swift */; };
+		286383AE1F88093800D2120C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286383AD1F88093800D2120C /* Action.swift */; };
 		28698C5F1F72CBA800FFE23E /* ARSCNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28698C5E1F72CBA700FFE23E /* ARSCNViewController.swift */; };
 		28698C611F72CBF900FFE23E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 28698C601F72CBF900FFE23E /* art.scnassets */; };
 		28A942971F23F266002E4320 /* BlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942961F23F266002E4320 /* BlurButton.swift */; };
@@ -46,6 +48,8 @@
 		284BFE321F1DA42700D77B07 /* parallax.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = parallax.min.js; sourceTree = "<group>"; };
 		285958481F20266700A3DA89 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		2859584B1F20335400A3DA89 /* parallax.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = parallax.css; sourceTree = "<group>"; };
+		286383AB1F88081200D2120C /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		286383AD1F88093800D2120C /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		28698C5E1F72CBA700FFE23E /* ARSCNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNViewController.swift; sourceTree = "<group>"; };
 		28698C601F72CBF900FFE23E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		28A942961F23F266002E4320 /* BlurButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurButton.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			children = (
 				287A16B61F3A9CB4001D30C2 /* CustomResources */,
 				287A16B51F3A9CAA001D30C2 /* Util */,
+				286383AA1F8807A500D2120C /* Models */,
 				287A16B41F3A9C97001D30C2 /* ViewControllers */,
 				2859584A1F20332D00A3DA89 /* web */,
 				284BFE301F1DA3BF00D77B07 /* images */,
@@ -120,6 +125,15 @@
 				2859584B1F20335400A3DA89 /* parallax.css */,
 			);
 			name = web;
+			sourceTree = "<group>";
+		};
+		286383AA1F8807A500D2120C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				286383AB1F88081200D2120C /* Box.swift */,
+				286383AD1F88093800D2120C /* Action.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		287A16B41F3A9C97001D30C2 /* ViewControllers */ = {
@@ -317,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28FEAF501F3AA3D3002EB5BC /* Animators.swift in Sources */,
+				286383AE1F88093800D2120C /* Action.swift in Sources */,
 				28FEAF561F3BAD9A002EB5BC /* ModalAuthViewController.swift in Sources */,
 				28A942971F23F266002E4320 /* BlurButton.swift in Sources */,
 				284BFE1F1F1D979100D77B07 /* ViewController.swift in Sources */,
@@ -325,6 +340,7 @@
 				28FEAF541F3B7F6B002EB5BC /* AuthViewController.swift in Sources */,
 				28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */,
 				28698C5F1F72CBA800FFE23E /* ARSCNViewController.swift in Sources */,
+				286383AC1F88081200D2120C /* Box.swift in Sources */,
 				28FEAF521F3AA457002EB5BC /* NavigationControllerDelegate.swift in Sources */,
 				284BFE1D1F1D979100D77B07 /* AppDelegate.swift in Sources */,
 			);
