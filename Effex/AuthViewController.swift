@@ -32,6 +32,7 @@ class AuthViewController: UIViewController
         if let vc = storyboard.instantiateViewController(withIdentifier: "modalAuth") as? ModalAuthViewController
         {
             vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
             vc.delegate = self
             self.present(vc, animated: true, completion: nil)
         }
