@@ -47,9 +47,9 @@ class Miya : NSObject {
     
     func miyaHoverAnimation()
     {
-        let moveUp = SCNAction.moveBy(x: 0, y: 1, z: 0, duration: 1)
+        let moveUp = SCNAction.moveBy(x: 0, y: 0.5, z: 0, duration: 1)
         moveUp.timingMode = .easeInEaseOut;
-        let moveDown = SCNAction.moveBy(x: 0, y: -1, z: 0, duration: 1)
+        let moveDown = SCNAction.moveBy(x: 0, y: -0.5, z: 0, duration: 1)
         moveDown.timingMode = .easeInEaseOut;
         let moveSequence = SCNAction.sequence([moveUp,moveDown])
         let moveLoop = SCNAction.repeatForever(moveSequence)

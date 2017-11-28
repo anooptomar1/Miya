@@ -46,10 +46,10 @@ class ARSCNViewController : UIViewController
         //scene attributes
         sceneView.autoenablesDefaultLighting = true
         
-//        let recog = UITapGestureRecognizer(target: self, action: #selector(moveToTouch(_:)))
-//        recog.numberOfTapsRequired = 1
-//        recog.numberOfTouchesRequired = 1
-//        sceneView.gestureRecognizers?.append(recog)
+        let recog = UILongPressGestureRecognizer(target: self, action: #selector(increaseDepth(press:)))
+        recog.minimumPressDuration = 1.0
+        sceneView.gestureRecognizers?.append(recog)
+        
         
         //collection view set up
 //        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 250, height: 250))
@@ -182,6 +182,15 @@ class ARSCNViewController : UIViewController
             let moveSequence = SCNAction.sequence([motion])
             let moveLoop = SCNAction.repeat(moveSequence, count: 1)
             parent.runAction(moveLoop)
+        }
+    }
+    
+    @objc func increaseDepth(press: UILongPressGestureRecognizer) {
+        print("fire")
+        if let parent = miya?.parent {
+            print(parent.position)
+            let posZ = parent.position.z - 0.05
+            parent.position.z = posZ
         }
     }
     
