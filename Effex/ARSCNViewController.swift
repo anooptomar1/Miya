@@ -15,9 +15,9 @@ class ARSCNViewController : UIViewController
 {
     var miya : Miya?
      @IBOutlet var sceneView : ARSCNView!
-    
     var boxes : [Box]?
     
+    var globalTouchTimer : Timer?
 //    override func loadView() {
 //        super.loadView()
 //    }
@@ -40,28 +40,28 @@ class ARSCNViewController : UIViewController
         cameraNode.position = SCNVector3Make(0, 0, 25)
         scene.rootNode.addChildNode(cameraNode)
 
+        //find out to how to do this, need better constraint? or get Miya to manually face camera at all times
+        let lookAt = SCNLookAtConstraint(target: cameraNode)
+        lookAt.isGimbalLockEnabled = true
         //set up for miya
-        miyaSetUp(scene: scene)
+        miyaSetUp(scene: scene, constraint: lookAt)
         
         //scene attributes
         sceneView.autoenablesDefaultLighting = true
-        
-        let recog = UILongPressGestureRecognizer(target: self, action: #selector(increaseDepth(press:)))
-        recog.minimumPressDuration = 1.0
-        sceneView.gestureRecognizers?.append(recog)
-        
         
         //collection view set up
 //        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 250, height: 250))
     }
     
-    func miyaSetUp(scene: SCNScene) {
+    func miyaSetUp(scene: SCNScene, constraint: SCNLookAtConstraint) {
         guard let jet = scene.rootNode.childNode(withName: "Jet", recursively: true) else{return}
         guard let viewPort = scene.rootNode.childNode(withName: "ViewPort", recursively: true) else{return}
         guard let bodyLining = scene.rootNode.childNode(withName: "BodyLining", recursively: true) else{return}
         guard let body = scene.rootNode.childNode(withName: "Body", recursively: true) else{return}
         
         miya = Miya(body: body, viewPort: viewPort, bodyLining: bodyLining, jet: jet)
+
+        body.constraints?.append(constraint)
         
         miya?.miyaHoverAnimation()
         miya?.viewPortAnimation()
@@ -131,9 +131,14 @@ class ARSCNViewController : UIViewController
     }
     
     //MARK: - TOUCH
-    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        globalTouchTimer?.invalidate()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
+        
+        globalTouchTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(increaseDepth(press:)), userInfo: nil, repeats: true)
+        globalTouchTimer?.fire()
         
         let hitList = sceneView.hitTest(touch.location(in: sceneView), options: nil)
         if hitList.count > 0 {
@@ -189,7 +194,7 @@ class ARSCNViewController : UIViewController
         print("fire")
         if let parent = miya?.parent {
             print(parent.position)
-            let posZ = parent.position.z - 0.05
+            let posZ = parent.position.z - 0.02
             parent.position.z = posZ
         }
     }
