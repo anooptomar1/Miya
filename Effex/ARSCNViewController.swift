@@ -181,7 +181,6 @@ class ARSCNViewController : UIViewController
     func moveToTouch(position: SCNVector3)
     {
         if let parent = miya?.parent {
-            
             let motion = SCNAction.move(to: position, duration: 0.84)
             motion.timingMode = .easeInEaseOut
             let moveSequence = SCNAction.sequence([motion])
