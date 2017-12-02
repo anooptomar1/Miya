@@ -143,8 +143,8 @@
 			children = (
 				284BFE1E1F1D979100D77B07 /* ViewController.swift */,
 				28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */,
-				28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */,
 				28698C5E1F72CBA700FFE23E /* ARSCNViewController.swift */,
+				28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */,
 				28FB4E951FD2651900C29872 /* HUDViewController.swift */,
 			);
 			name = ViewControllers;

@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         switchChildren.append(self.entryBtn)
         
         //Parallax set up
-        self.bgImageView.setUpParallax(rate: 3.0)
+//        self.bgImageView.setUpParallax(rate: 3.0)
         self.flareDotsImageView.setUpParallax(rate: 2.0)
         self.flareImageView.setUpParallax(rate: 1.0)
         
@@ -73,17 +73,19 @@ class ViewController: UIViewController {
             child.alpha = 0.0
         }
             
-        _ = Timer.scheduledTimer(withTimeInterval: 2.4, repeats: false, block: { (begin) in
+        _ = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false, block: { (begin) in
             
             self.imageWidth = self.bgImageView.frame.width
             self.imageHeight = self.bgImageView.frame.width
             
             self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
             
-            UIView.animate(withDuration: 2.4, animations: {
+            UIView.animate(withDuration: 0.8, animations: {
                 self.flareDotsImageView.alpha = 0.84
                 self.flareImageView.alpha = 0.48
                 self.switchBtnContainer.alpha = 1.0
+                
+                self.animateArrows()
                 
                 for child in self.switchChildren
                 {
@@ -121,7 +123,7 @@ class ViewController: UIViewController {
         self.dragBtn.addTarget(self, action: #selector(wasDragged(btn:event:)), for: UIControlEvents.touchDragInside)
         self.dragBtn.addTarget(self, action: #selector(beganDrag(btn:event:)), for: UIControlEvents.touchDown)
         self.dragBtn.addTarget(self, action: #selector(exitDrag(btn:event:)), for: UIControlEvents.touchUpInside)
-        self.dragBtn.indicator.color = UIColor.lightGray
+        self.dragBtn.indicator.color = UIColor.myMiyaSunset
 
         //orienation
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
@@ -255,13 +257,11 @@ class ViewController: UIViewController {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
             self.bgImageView.contentMode = .center
-            self.dragBtn.indicator.color = UIColor.myMiyaSunset
         }
         
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             print("Portrait")
             self.bgImageView.contentMode = .scaleAspectFill
-            self.dragBtn.indicator.color = UIColor.myOuterSpaceBlack
         }
         
         if(collisionTransition) {
