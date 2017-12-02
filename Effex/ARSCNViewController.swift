@@ -274,6 +274,9 @@ extension ARSCNViewController: HUDViewControllerDelegate {
         self.globalZoomOutTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(decreaseDepth), userInfo: nil, repeats: true)
         self.globalZoomOutTimer?.fire()
     }
+    func dExit() {
+        cleanUpTimer()
+    }
     
     func iDepth() {
         print("fire i")
@@ -281,6 +284,9 @@ extension ARSCNViewController: HUDViewControllerDelegate {
         
         self.globalZoomInTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(increaseDepth), userInfo: nil, repeats: true)
         self.globalZoomInTimer?.fire()
+    }
+    func iExit() {
+        cleanUpTimer()
     }
 }
 
