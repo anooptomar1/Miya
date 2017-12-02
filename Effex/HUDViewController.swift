@@ -16,14 +16,14 @@ class HUDViewController : UIViewController
     var zoomIn : BlurButton?
     
     override func viewDidLoad() {
-        zoomOut = BlurButton(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0), needIndicator: false)
+        zoomOut = BlurButton(frame: CGRect(x: 8.0, y: self.view.frame.height/2-37.5, width: 75.0, height: 75.0), needIndicator: false)
         guard let zOut = zoomOut else{return}
         zOut.layer.cornerRadius = zOut.frame.width/2
         zOut.addBlurEffect(withStyle: .extraLight)
         zOut.updateMaskForView(text: "-")
         
         
-        zoomIn = BlurButton(frame: CGRect(x: self.view.frame.width-100.0, y: 0.0, width: 100.0, height: 100.0), needIndicator: false)
+        zoomIn = BlurButton(frame: CGRect(x: self.view.frame.width-83.0, y: self.view.frame.height/2-37.5, width: 75.0, height: 75.0), needIndicator: false)
         guard let zIn = zoomIn else{return}
         zIn.layer.cornerRadius = zIn.frame.width/2
         zIn.addBlurEffect(withStyle: .extraLight)
