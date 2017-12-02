@@ -154,8 +154,7 @@ class ARSCNViewController : UIViewController
     
     //MARK: - TOUCH
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        globalZoomOutTimer?.invalidate()
-        globalZoomInTimer?.invalidate()
+        cleanUpTimer()
         
         if let hud = self.hud {
             UIView.animate(withDuration: 1.24) {
@@ -227,16 +226,14 @@ class ARSCNViewController : UIViewController
     
     @objc func decreaseDepth() {
         if let parent = miya?.parent {
-            print(parent.position)
-            let posZ = parent.position.z - 0.02
+            let posZ = parent.position.z - 0.01
             parent.position.z = posZ
         }
     }
     
     @objc func increaseDepth() {
         if let parent = miya?.parent {
-            print(parent.position)
-            let posZ = parent.position.z + 0.02
+            let posZ = parent.position.z + 0.01
             parent.position.z = posZ
         }
     }
@@ -246,6 +243,14 @@ class ARSCNViewController : UIViewController
         
         // Pause the view's session
         sceneView?.session.pause()
+    }
+    
+    func cleanUpTimer() {
+        self.globalZoomOutTimer?.invalidate()
+        self.globalZoomOutTimer = Timer()
+        
+        self.globalZoomInTimer?.invalidate()
+        self.globalZoomInTimer = Timer()
     }
 }
 
@@ -264,24 +269,19 @@ extension ARSCNViewController: ARSCNViewDelegate {
 extension ARSCNViewController: HUDViewControllerDelegate {
     func dDepth() {
         print("fire d")
+        cleanUpTimer()
+        
         self.globalZoomOutTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(decreaseDepth), userInfo: nil, repeats: true)
         self.globalZoomOutTimer?.fire()
     }
     
-    func dExit() {
-        self.globalZoomOutTimer?.invalidate()
-    }
-    
     func iDepth() {
         print("fire i")
+        cleanUpTimer()
+        
         self.globalZoomInTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(increaseDepth), userInfo: nil, repeats: true)
         self.globalZoomInTimer?.fire()
     }
-    
-    func iExit() {
-        self.globalZoomInTimer?.invalidate()
-    }
-    
 }
 
 //extension ARSCNViewController: UICollectionViewDelegate, UICollectionViewDataSource
