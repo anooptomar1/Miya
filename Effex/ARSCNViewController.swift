@@ -21,6 +21,8 @@ class ARSCNViewController : UIViewController
     var hud : HUDViewController?
     
     var globalTouchTimer : Timer?
+    var globalZoomOutTimer : Timer?
+    var globalZoomInTimer : Timer?
 //    override func loadView() {
 //        super.loadView()
 //    }
@@ -46,6 +48,7 @@ class ARSCNViewController : UIViewController
         //find out to how to do this, need better constraint? or get Miya to manually face camera at all times
         let lookAt = SCNLookAtConstraint(target: cameraNode)
         lookAt.isGimbalLockEnabled = true
+        
         //set up for miya
         miyaSetUp(scene: scene, constraint: lookAt)
         
@@ -63,7 +66,12 @@ class ARSCNViewController : UIViewController
         self.hud = HUDViewController()
         if let hud = self.hud {
             hud.view.backgroundColor = UIColor.clear
+            hud.delegate = self
+            
             self.view.addSubview(hud.view)
+            
+            hud.zoomOut?.alpha = 0.0
+            hud.zoomIn?.alpha = 0.0
         }
     }
     
@@ -146,13 +154,27 @@ class ARSCNViewController : UIViewController
     
     //MARK: - TOUCH
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        globalTouchTimer?.invalidate()
+        globalZoomOutTimer?.invalidate()
+        globalZoomInTimer?.invalidate()
+        
+        if let hud = self.hud {
+            UIView.animate(withDuration: 1.24) {
+                hud.zoomOut?.alpha = 0.0
+                hud.zoomIn?.alpha = 0.0
+            }
+        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         
-        globalTouchTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(increaseDepth(press:)), userInfo: nil, repeats: true)
-        globalTouchTimer?.fire()
+        if let hud = self.hud {
+            hud.zoomOut?.alpha = 0.0
+            hud.zoomIn?.alpha = 0.0
+            UIView.animate(withDuration: 1.24) {
+                hud.zoomOut?.alpha = 1.0
+                hud.zoomIn?.alpha = 1.0
+            }
+        }
         
         let hitList = sceneView.hitTest(touch.location(in: sceneView), options: nil)
         if hitList.count > 0 {
@@ -203,11 +225,18 @@ class ARSCNViewController : UIViewController
         }
     }
     
-    @objc func increaseDepth(press: UILongPressGestureRecognizer) {
-        print("fire")
+    @objc func decreaseDepth() {
         if let parent = miya?.parent {
             print(parent.position)
             let posZ = parent.position.z - 0.02
+            parent.position.z = posZ
+        }
+    }
+    
+    @objc func increaseDepth() {
+        if let parent = miya?.parent {
+            print(parent.position)
+            let posZ = parent.position.z + 0.02
             parent.position.z = posZ
         }
     }
@@ -229,6 +258,20 @@ extension ARSCNViewController: ARSCNViewDelegate {
         let node = SCNNode()
         
         return node
+    }
+}
+
+extension ARSCNViewController: HUDViewControllerDelegate {
+    func dDepth() {
+        print("fire d")
+        self.globalZoomOutTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(decreaseDepth), userInfo: nil, repeats: true)
+        self.globalZoomOutTimer?.fire()
+    }
+    
+    func iDepth() {
+        print("fire i")
+        self.globalZoomInTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(increaseDepth), userInfo: nil, repeats: true)
+        self.globalZoomInTimer?.fire()
     }
 }
 

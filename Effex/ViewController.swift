@@ -249,7 +249,6 @@ class ViewController: UIViewController {
     
     // MARK: - animation
     @objc func rotated() {
-        
         self.maskRespectToButton(viewToMask: self.switchBtnContainer, maskRect: self.dragBtn.bounds, invert: true)
         
         self.initialCenter = self.dragBtn.center

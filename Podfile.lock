@@ -1,16 +1,16 @@
 PODS:
-  - InteractiveSideMenu (2.0)
-  - NVActivityIndicatorView (3.7.0):
-    - NVActivityIndicatorView/Presenter (= 3.7.0)
-  - NVActivityIndicatorView/Presenter (3.7.0)
+  - InteractiveSideMenu (2.1)
+  - NVActivityIndicatorView (4.0.1):
+    - NVActivityIndicatorView/Presenter (= 4.0.1)
+  - NVActivityIndicatorView/Presenter (4.0.1)
 
 DEPENDENCIES:
   - InteractiveSideMenu
   - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
-  InteractiveSideMenu: 337f6d95a3f6543c517a888893531430e18553b3
-  NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
+  InteractiveSideMenu: 9e3c8b004edd8b8c2ebaef2c3f0fde87c357b904
+  NVActivityIndicatorView: 77ed6d7b571643e24899e7858bf9ae2ee4c21f31
 
 PODFILE CHECKSUM: eb4e66a948fd1ca758be540bda9ab8534d53343e
 

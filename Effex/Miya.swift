@@ -211,11 +211,11 @@ class Miya : NSObject {
         trail.emitterShape = geometry
         
         //trail general init
-        trail.birthRate = 20.0
+        trail.birthRate = 14.0
         trail.emittingDirection = SCNVector3Make(0.0, 0.0, 0.0)
         trail.spreadingAngle = 0.0
         trail.particleLifeSpan = 1.0
-        trail.particleSize = 0.1
+        trail.particleSize = 0.08
         trail.particleImage = UIImage(named: "bokeh.png")
         return trail
     }
