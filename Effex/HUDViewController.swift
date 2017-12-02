@@ -11,7 +11,9 @@ import UIKit
 
 protocol HUDViewControllerDelegate {
     func dDepth()
+    func dExit()
     func iDepth()
+    func iExit()
 }
 
 class HUDViewController : UIViewController
@@ -30,24 +32,36 @@ class HUDViewController : UIViewController
         zOut.layer.cornerRadius = zOut.frame.width/2
         zOut.addBlurEffect(withStyle: .extraLight)
         zOut.updateMaskForView(text: "-")
-        zOut.addTarget(self, action: #selector(zOutDepth), for: .touchUpInside)
+        zOut.addTarget(self, action: #selector(zOutDepth), for: .touchDragInside)
+        zOut.addTarget(self, action: #selector(zOutCancel), for: .touchDragExit)
         
         zoomIn = BlurButton(frame: CGRect(x: self.view.frame.width-83.0, y: self.view.frame.height/2-37.5, width: 75.0, height: 75.0), needIndicator: false)
         guard let zIn = zoomIn else{return}
         zIn.layer.cornerRadius = zIn.frame.width/2
         zIn.addBlurEffect(withStyle: .extraLight)
         zIn.updateMaskForView(text: "+")
-        zIn.addTarget(self, action: #selector(zInDepth), for: .touchUpInside)
+        zIn.addTarget(self, action: #selector(zInDepth), for: .touchDragInside)
+        zIn.addTarget(self, action: #selector(zInCancel), for: .touchDragExit)
         
         self.view.addSubview(zOut)
         self.view.addSubview(zIn)
     }
     
     @objc func zOutDepth() {
+        print(delegate)
         delegate.dDepth()
+    }
+    @objc func zOutCancel() {
+        print(delegate)
+        delegate.dExit()
     }
     
     @objc func zInDepth() {
+        print(delegate)
         delegate.iDepth()
+    }
+    @objc func zInCancel() {
+        print(delegate)
+        delegate.iExit()
     }
 }

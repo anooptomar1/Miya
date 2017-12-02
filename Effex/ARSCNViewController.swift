@@ -264,15 +264,24 @@ extension ARSCNViewController: ARSCNViewDelegate {
 extension ARSCNViewController: HUDViewControllerDelegate {
     func dDepth() {
         print("fire d")
-        self.globalZoomOutTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(decreaseDepth), userInfo: nil, repeats: true)
+        self.globalZoomOutTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(decreaseDepth), userInfo: nil, repeats: true)
         self.globalZoomOutTimer?.fire()
+    }
+    
+    func dExit() {
+        self.globalZoomOutTimer?.invalidate()
     }
     
     func iDepth() {
         print("fire i")
-        self.globalZoomInTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(increaseDepth), userInfo: nil, repeats: true)
+        self.globalZoomInTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(increaseDepth), userInfo: nil, repeats: true)
         self.globalZoomInTimer?.fire()
     }
+    
+    func iExit() {
+        self.globalZoomInTimer?.invalidate()
+    }
+    
 }
 
 //extension ARSCNViewController: UICollectionViewDelegate, UICollectionViewDataSource
