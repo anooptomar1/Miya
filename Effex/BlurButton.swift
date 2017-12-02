@@ -20,6 +20,20 @@ class BlurButton: UIButton {
     */
     var indicator : NVActivityIndicatorView!
     
+    init(frame: CGRect, needIndicator: Bool) {
+        super.init(frame: frame)
+        
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.cornerRadius = self.frame.width/2
+        self.clipsToBounds = true
+        
+        if(needIndicator) {
+            indicator = NVActivityIndicatorView(frame: CGRect(x: 8, y: 8, width: self.frame.width-16, height: self.frame.height-16), type: .orbit, color: UIColor.myMiyaSunset, padding: 0)
+            self.addSubview(indicator)
+        }
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         

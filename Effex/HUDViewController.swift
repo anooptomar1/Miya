@@ -12,19 +12,22 @@ import UIKit
 class HUDViewController : UIViewController
 {
     //zoom controls
-    var zoomOut : UIButton?
-    var zoomIn : UIButton?
+    var zoomOut : BlurButton?
+    var zoomIn : BlurButton?
     
     override func viewDidLoad() {
-        zoomOut = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0))
+        zoomOut = BlurButton(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0), needIndicator: false)
         guard let zOut = zoomOut else{return}
         zOut.layer.cornerRadius = zOut.frame.width/2
-        zOut.backgroundColor = UIColor.white
+        zOut.addBlurEffect(withStyle: .extraLight)
+        zOut.updateMaskForView(text: "-")
         
-        zoomIn = UIButton(frame: CGRect(x: self.view.frame.width-100.0, y: 0.0, width: 100.0, height: 100.0))
+        
+        zoomIn = BlurButton(frame: CGRect(x: self.view.frame.width-100.0, y: 0.0, width: 100.0, height: 100.0), needIndicator: false)
         guard let zIn = zoomIn else{return}
         zIn.layer.cornerRadius = zIn.frame.width/2
-        zIn.backgroundColor = UIColor.red
+        zIn.addBlurEffect(withStyle: .extraLight)
+        zIn.updateMaskForView(text: "+")
         
         self.view.addSubview(zOut)
         self.view.addSubview(zIn)
