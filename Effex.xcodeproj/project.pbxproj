@@ -24,6 +24,7 @@
 		28A942971F23F266002E4320 /* BlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942961F23F266002E4320 /* BlurButton.swift */; };
 		28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942981F23F4C0002E4320 /* GTBackground.swift */; };
 		28A9429D1F243A87002E4320 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9429C1F243A87002E4320 /* audio */; };
+		28FB4E961FD2651900C29872 /* HUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FB4E951FD2651900C29872 /* HUDViewController.swift */; };
 		28FC0A2B1F6B153B0046DBE7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A291F6B153B0046DBE7 /* spark.png */; };
 		28FC0A2F1F6B19A30046DBE7 /* jetEmission.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */; };
 		28FC0A301F6B19A30046DBE7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A2E1F6B19A30046DBE7 /* bokeh.png */; };
@@ -55,6 +56,7 @@
 		28A942961F23F266002E4320 /* BlurButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurButton.swift; sourceTree = "<group>"; };
 		28A942981F23F4C0002E4320 /* GTBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTBackground.swift; sourceTree = "<group>"; };
 		28A9429C1F243A87002E4320 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
+		28FB4E951FD2651900C29872 /* HUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDViewController.swift; sourceTree = "<group>"; };
 		28FC0A291F6B153B0046DBE7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = jetEmission.scnp; sourceTree = "<group>"; };
 		28FC0A2E1F6B19A30046DBE7 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */,
 				28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */,
 				28698C5E1F72CBA700FFE23E /* ARSCNViewController.swift */,
+				28FB4E951FD2651900C29872 /* HUDViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				28698C5F1F72CBA800FFE23E /* ARSCNViewController.swift in Sources */,
 				286383AC1F88081200D2120C /* Box.swift in Sources */,
 				28FEAF521F3AA457002EB5BC /* NavigationControllerDelegate.swift in Sources */,
+				28FB4E961FD2651900C29872 /* HUDViewController.swift in Sources */,
 				284BFE1D1F1D979100D77B07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

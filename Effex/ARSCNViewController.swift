@@ -17,6 +17,9 @@ class ARSCNViewController : UIViewController
      @IBOutlet var sceneView : ARSCNView!
     var boxes : [Box]?
     
+    //hud
+    var hud : HUDViewController?
+    
     var globalTouchTimer : Timer?
 //    override func loadView() {
 //        super.loadView()
@@ -49,8 +52,19 @@ class ARSCNViewController : UIViewController
         //scene attributes
         sceneView.autoenablesDefaultLighting = true
         
+        //hud set up
+        hudSetUp()
+        
         //collection view set up
 //        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 250, height: 250))
+    }
+    
+    func hudSetUp() {
+        self.hud = HUDViewController()
+        if let hud = self.hud {
+            hud.view.backgroundColor = UIColor.clear
+            self.view.addSubview(hud.view)
+        }
     }
     
     func miyaSetUp(scene: SCNScene, constraint: SCNLookAtConstraint) {
