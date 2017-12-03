@@ -23,6 +23,7 @@ class ARSCNViewController : UIViewController
     var hud : HUDViewController?
     var hudFeaturesSet : Bool = false
 
+    var collisionListenerTimer : Timer?
     var globalZoomOutTimer : Timer?
     var globalZoomInTimer : Timer?
 //    override func loadView() {
@@ -95,6 +96,9 @@ class ARSCNViewController : UIViewController
                 }
                 
                 hud.startListening()
+//                collisionListenerTimer?.invalidate()
+//                collisionListenerTimer = Timer()
+//                collisionListenerTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(collisionWithHudComponents), userInfo: nil, repeats: true)
             }
         }
     }
@@ -192,11 +196,6 @@ class ARSCNViewController : UIViewController
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         
-        if hudFeaturesSet, let hud = self.hud {
-            print(touch.location(in: hud.view))
-            print(hud.zoomIn?.frame)
-        }
-        
         let hitList = sceneView.hitTest(touch.location(in: sceneView), options: nil)
         if hitList.count > 0 {
             if let hitObject = hitList.first {
@@ -219,6 +218,19 @@ class ARSCNViewController : UIViewController
             let hitTransform = SCNMatrix4(hitResult.worldTransform)
             let position = SCNVector3(x: hitTransform.m41, y: hitTransform.m42, z: hitTransform.m43)
             self.moveToTouch(position: position)
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else{return}
+        
+        if hudFeaturesSet, let hud = self.hud {
+            let location = touch.location(in: hud.view)
+            print(location)
+            print(hud.zoomIn?.frame)
+            if let touchView = hud.touchViewer {
+                touchView.frame.origin = CGPoint(x: location.x-touchView.frame.width/2, y: location.y-touchView.frame.height/2)
+            }
         }
     }
     
@@ -245,7 +257,7 @@ class ARSCNViewController : UIViewController
             parent.runAction(moveLoop)
         }
     }
-    
+
     @objc func decreaseDepth() {
         if let parent = miya?.parent {
             let posZ = parent.position.z - 0.01
@@ -268,16 +280,21 @@ class ARSCNViewController : UIViewController
     }
     
     func cleanUpTimer() {
+        self.collisionListenerTimer?.invalidate()
+        self.collisionListenerTimer = Timer()
+        
         self.globalZoomOutTimer?.invalidate()
         self.globalZoomOutTimer = Timer()
         
         self.globalZoomInTimer?.invalidate()
         self.globalZoomInTimer = Timer()
         
-        self.hud?.touchViewer?.alpha = 0.0
+        self.hud?.touchViewer?.alpha = 1.0
         
-        UIView.animate(withDuration: 0.48) {
+        UIView.animate(withDuration: 0.48, animations: {
             self.hud?.touchViewer?.alpha = 1.0
+        }) { (bool) in
+            self.hud?.touchViewer?.stopAnimating()
         }
     }
 }

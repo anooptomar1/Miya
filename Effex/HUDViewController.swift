@@ -15,6 +15,7 @@ protocol HUDViewControllerDelegate {
     func iDepth()
     func dExit()
     func iExit()
+    
 }
 
 class HUDViewController : UIViewController
@@ -27,7 +28,6 @@ class HUDViewController : UIViewController
     var touchViewer : NVActivityIndicatorView?
     
     var delegate : HUDViewControllerDelegate!
-    var collisionListenerTimer : Timer?
     
     override func viewDidLoad() {
         
@@ -54,7 +54,7 @@ class HUDViewController : UIViewController
         self.view.addSubview(zIn)
         
         //touch indicator
-        touchViewer = NVActivityIndicatorView(frame: CGRect(x: 0.0, y: 0.0, width: 70.0, height: 70.0), type: .ballScaleRippleMultiple, color: UIColor.myMiyaSunset, padding: 8.0)
+        touchViewer = NVActivityIndicatorView(frame: CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0), type: .ballScaleRippleMultiple, color: UIColor.myMiyaSunset, padding: 8.0)
         if let touchViewer = self.touchViewer {
             touchViewer.alpha = 0.0
             self.view.addSubview(touchViewer)
@@ -64,7 +64,7 @@ class HUDViewController : UIViewController
     func startListening() {
         print("started listening")
         touchViewer?.alpha = 0.0
-        
+        touchViewer?.startAnimating()
         UIView.animate(withDuration: 0.48) {
             self.touchViewer?.alpha = 1.0
         }
