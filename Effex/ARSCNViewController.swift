@@ -10,6 +10,8 @@ import Foundation
 import SceneKit
 import UIKit
 import ARKit
+import NVActivityIndicatorView
+import AudioToolbox
 
 class ARSCNViewController : UIViewController
 {
@@ -19,8 +21,8 @@ class ARSCNViewController : UIViewController
     
     //hud
     var hud : HUDViewController?
-    
-    var globalTouchTimer : Timer?
+    var hudFeaturesSet : Bool = false
+
     var globalZoomOutTimer : Timer?
     var globalZoomInTimer : Timer?
 //    override func loadView() {
@@ -31,7 +33,7 @@ class ARSCNViewController : UIViewController
     {
         super.viewDidLoad()
         
-        guard let scene = SCNScene(named: "art.scnassets/miya.scn") else{return}
+        guard let scene = SCNScene(named: "art.scnassets/miya copy 2.scn") else{return}
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -44,18 +46,21 @@ class ARSCNViewController : UIViewController
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3Make(0, 0, 25)
         scene.rootNode.addChildNode(cameraNode)
-
+        
         //find out to how to do this, need better constraint? or get Miya to manually face camera at all times
-        let lookAt = SCNLookAtConstraint(target: cameraNode)
-        lookAt.isGimbalLockEnabled = true
-        
         //set up for miya
-        miyaSetUp(scene: scene, constraint: lookAt)
-        
+        miyaSetUp(scene: scene)//, constraint: nil)
+
         //scene attributes
         sceneView.autoenablesDefaultLighting = true
-        
+
         //hud set up
+        let holdGesture = UILongPressGestureRecognizer(target: self, action: #selector(longStarted))
+        holdGesture.minimumPressDuration = 1.0
+        holdGesture.cancelsTouchesInView = false
+//        holdGesture.numberOfTouchesRequired
+
+        self.view.gestureRecognizers?.append(holdGesture)
         hudSetUp()
         
         //collection view set up
@@ -75,7 +80,26 @@ class ARSCNViewController : UIViewController
         }
     }
     
-    func miyaSetUp(scene: SCNScene, constraint: SCNLookAtConstraint) {
+    @objc func longStarted() {
+        if(!hudFeaturesSet) {
+            hudFeaturesSet = true
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
+            
+            if let hud = self.hud {
+                hud.zoomOut?.alpha = 0.0
+                hud.zoomIn?.alpha = 0.0
+                UIView.animate(withDuration: 1.24) {
+                    hud.zoomOut?.alpha = 1.0
+                    hud.zoomIn?.alpha = 1.0
+                }
+                
+                hud.startListening()
+            }
+        }
+    }
+    
+    func miyaSetUp(scene: SCNScene) {//}, constraint: SCNLookAtConstraint) {
         guard let jet = scene.rootNode.childNode(withName: "Jet", recursively: true) else{return}
         guard let viewPort = scene.rootNode.childNode(withName: "ViewPort", recursively: true) else{return}
         guard let bodyLining = scene.rootNode.childNode(withName: "BodyLining", recursively: true) else{return}
@@ -83,7 +107,7 @@ class ARSCNViewController : UIViewController
         
         miya = Miya(body: body, viewPort: viewPort, bodyLining: bodyLining, jet: jet)
 
-        body.constraints?.append(constraint)
+//        body.constraints?.append(constraint)
         
         miya?.miyaHoverAnimation()
         miya?.viewPortAnimation()
@@ -155,24 +179,22 @@ class ARSCNViewController : UIViewController
     //MARK: - TOUCH
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         cleanUpTimer()
-        
-        if let hud = self.hud {
+        print("END")
+        if hudFeaturesSet, let hud = self.hud {
             UIView.animate(withDuration: 1.24) {
                 hud.zoomOut?.alpha = 0.0
                 hud.zoomIn?.alpha = 0.0
             }
         }
+        
+        hudFeaturesSet = false
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {return}
         
-        if let hud = self.hud {
-            hud.zoomOut?.alpha = 0.0
-            hud.zoomIn?.alpha = 0.0
-            UIView.animate(withDuration: 1.24) {
-                hud.zoomOut?.alpha = 1.0
-                hud.zoomIn?.alpha = 1.0
-            }
+        if hudFeaturesSet, let hud = self.hud {
+            print(touch.location(in: hud.view))
+            print(hud.zoomIn?.frame)
         }
         
         let hitList = sceneView.hitTest(touch.location(in: sceneView), options: nil)
@@ -251,6 +273,12 @@ class ARSCNViewController : UIViewController
         
         self.globalZoomInTimer?.invalidate()
         self.globalZoomInTimer = Timer()
+        
+        self.hud?.touchViewer?.alpha = 0.0
+        
+        UIView.animate(withDuration: 0.48) {
+            self.hud?.touchViewer?.alpha = 1.0
+        }
     }
 }
 
