@@ -91,8 +91,8 @@ class ARSCNViewController : UIViewController
                 hud.zoomOut?.alpha = 0.0
                 hud.zoomIn?.alpha = 0.0
                 UIView.animate(withDuration: 1.24) {
-                    hud.zoomOut?.alpha = 1.0
-                    hud.zoomIn?.alpha = 1.0
+                    hud.zoomOut?.alpha = 0.5
+                    hud.zoomIn?.alpha = 0.5
                 }
                 
                 hud.startListening()
@@ -191,6 +191,13 @@ class ARSCNViewController : UIViewController
             }
         }
         
+        self.hud?.touchViewer?.alpha = 1.0
+        UIView.animate(withDuration: 0.48, animations: {
+            self.hud?.touchViewer?.alpha = 1.0
+        }) { (bool) in
+            self.hud?.touchViewer?.stopAnimating()
+        }
+        
         hudFeaturesSet = false
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -229,7 +236,11 @@ class ARSCNViewController : UIViewController
             print(location)
             print(hud.zoomIn?.frame)
             if let touchView = hud.touchViewer {
+                //update visible position of touch
                 touchView.frame.origin = CGPoint(x: location.x-touchView.frame.width/2, y: location.y-touchView.frame.height/2)
+                
+                //detect collision
+                hud.verifyCollision()
             }
         }
     }
@@ -280,22 +291,11 @@ class ARSCNViewController : UIViewController
     }
     
     func cleanUpTimer() {
-        self.collisionListenerTimer?.invalidate()
-        self.collisionListenerTimer = Timer()
-        
         self.globalZoomOutTimer?.invalidate()
         self.globalZoomOutTimer = Timer()
         
         self.globalZoomInTimer?.invalidate()
         self.globalZoomInTimer = Timer()
-        
-        self.hud?.touchViewer?.alpha = 1.0
-        
-        UIView.animate(withDuration: 0.48, animations: {
-            self.hud?.touchViewer?.alpha = 1.0
-        }) { (bool) in
-            self.hud?.touchViewer?.stopAnimating()
-        }
     }
 }
 
@@ -319,9 +319,6 @@ extension ARSCNViewController: HUDViewControllerDelegate {
         self.globalZoomOutTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(decreaseDepth), userInfo: nil, repeats: true)
         self.globalZoomOutTimer?.fire()
     }
-    func dExit() {
-        cleanUpTimer()
-    }
     
     func iDepth() {
         print("fire i")
@@ -330,7 +327,8 @@ extension ARSCNViewController: HUDViewControllerDelegate {
         self.globalZoomInTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(increaseDepth), userInfo: nil, repeats: true)
         self.globalZoomInTimer?.fire()
     }
-    func iExit() {
+    
+    func clear() {
         cleanUpTimer()
     }
 }
