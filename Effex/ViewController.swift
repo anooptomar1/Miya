@@ -225,7 +225,6 @@ class ViewController: UIViewController {
     
     @objc func wasDragged (btn : UIButton, event :UIEvent)
     {
-        print("Dragging")
         guard let touch = event.touches(for: btn)?.first else {return}
         
         let previousLocation : CGPoint = touch .previousLocation(in: btn)

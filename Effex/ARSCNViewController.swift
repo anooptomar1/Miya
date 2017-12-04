@@ -42,16 +42,16 @@ class ARSCNViewController : UIViewController
         sceneView.showsStatistics = true
         sceneView.scene = scene
 
-//        let cameraNode = SCNNode()
-//        cameraNode.camera = SCNCamera()
-//        cameraNode.position = SCNVector3Make(0, 0, 25)
-//        scene.rootNode.addChildNode(cameraNode)
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3Make(0, 0, 25)
+        scene.rootNode.addChildNode(cameraNode)
         
         //find out to how to do this, need better constraint? or get Miya to manually face camera at all times
         let lookAt = SCNBillboardConstraint()
         
         //set up for miya
-        miyaSetUp(scene: scene, constraint: lookAt)
+        miyaSetUp(scene: scene, constraint: lookAt, focus: cameraNode)
 
         //scene attributes
         sceneView.autoenablesDefaultLighting = true
@@ -101,7 +101,7 @@ class ARSCNViewController : UIViewController
         }
     }
     
-    func miyaSetUp(scene: SCNScene, constraint: SCNBillboardConstraint) {
+    func miyaSetUp(scene: SCNScene, constraint: SCNBillboardConstraint, focus: SCNNode) {
         guard let jet = scene.rootNode.childNode(withName: "Jet", recursively: true) else{return}
         guard let viewPort = scene.rootNode.childNode(withName: "ViewPort", recursively: true) else{return}
         guard let bodyLining = scene.rootNode.childNode(withName: "BodyLining", recursively: true) else{return}
@@ -111,33 +111,10 @@ class ARSCNViewController : UIViewController
 
         if let parent = miya?.parent
         {
-            let (min, max) = parent.boundingBox
-            let dx = min.x + 0.5 * (max.x - min.x)
-            let dy = min.y + 0.5 * (max.y - min.y)
-            let dz = min.z + 0.5 * (max.z - min.z)
-            parent.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
-//            parent.pivot = SCNMatrix4MakeRotation(Float.pi, 1, 1, 0)
-            parent.scale = SCNVector3(0.2, 0.2, 0.2)
-//            parent.position = SCNVector3(-0.004, -0.382, -1.321)
-            let plane = SCNPlane(width: 0.2, height: 0.2)
-            let blueMaterial = SCNMaterial()
-            blueMaterial.diffuse.contents = UIColor.blue
-            plane.firstMaterial = blueMaterial
-            let container = SCNNode(geometry: plane)
-
-            constraint.freeAxes = .Y
-            container.constraints = [constraint]
-
-            container.position = SCNVector3(0, 0, -0.5)
-            container.addChildNode(parent)
-            container.isHidden = true
-            miya?.makeParent(parent: container)
-            
-            sceneView.scene.rootNode.addChildNode(container)
-            
-//
-//            let lookAt = SCNLookAtConstraint(target: sceneView.pointOfView)
-//            parent.pivot = SCNMatrix4MakeRotation(Float.pi, 0, 1, 0)
+            let it = SCNLookAtConstraint(target: sceneView.pointOfView)
+            it.isGimbalLockEnabled = true
+            parent.constraints = [it]
+            parent.pivot = SCNMatrix4MakeRotation(Float.pi, 0, 1, 1)
         }
         
         miya?.miyaHoverAnimation()
@@ -290,9 +267,12 @@ class ARSCNViewController : UIViewController
         if let parent = miya?.parent {
             let motion = SCNAction.move(to: position, duration: 0.84)
             motion.timingMode = .easeInEaseOut
-            let moveSequence = SCNAction.sequence([motion])
+//            let rotation = SCNAction.rotateTo(x: CGFloat(position.x), y: CGFloat(position.y), z: CGFloat(position.z), duration: 0.01)
+            let moveSequence = SCNAction.sequence([motion])//, rotation])
             let moveLoop = SCNAction.repeat(moveSequence, count: 1)
             parent.runAction(moveLoop)
+//            parent.pivot = SCNMatrix4MakeRotation(Float.pi, 0, 0, position.z)
+            
         }
     }
 
