@@ -47,11 +47,8 @@ class ARSCNViewController : UIViewController
         cameraNode.position = SCNVector3Make(0, 0, 25)
         scene.rootNode.addChildNode(cameraNode)
         
-        //find out to how to do this, need better constraint? or get Miya to manually face camera at all times
-        let lookAt = SCNBillboardConstraint()
-        
         //set up for miya
-        miyaSetUp(scene: scene, constraint: lookAt, focus: cameraNode)
+        miyaSetUp(scene: scene)
 
         //scene attributes
         sceneView.autoenablesDefaultLighting = true
@@ -101,7 +98,7 @@ class ARSCNViewController : UIViewController
         }
     }
     
-    func miyaSetUp(scene: SCNScene, constraint: SCNBillboardConstraint, focus: SCNNode) {
+    func miyaSetUp(scene: SCNScene) {
         guard let jet = scene.rootNode.childNode(withName: "Jet", recursively: true) else{return}
         guard let viewPort = scene.rootNode.childNode(withName: "ViewPort", recursively: true) else{return}
         guard let bodyLining = scene.rootNode.childNode(withName: "BodyLining", recursively: true) else{return}
@@ -265,19 +262,26 @@ class ARSCNViewController : UIViewController
     func moveToTouch(position: SCNVector3)
     {
         if let parent = miya?.parent {
+            if let POV = self.sceneView.pointOfView {
+                
+//                parent.rotate(by: POV.orientation, aroundTarget: position)
+//                parent.localRotate(by: POV.orientation)
+                let orient = SCNQuaternion.init(parent.orientation.x, parent.orientation.y, parent.orientation.z, parent.orientation.w)
+                parent.rotate(by: orient, aroundTarget: position)//SCNQuaternion(parent.orientation.x, parent.orientation.y, parent.orientation.z + 0.1, parent.orientation.w))
+            }
+//            parent.rotation *= position
+            
             let motion = SCNAction.move(to: position, duration: 0.84)
             motion.timingMode = .easeInEaseOut
-//            let rotation = SCNAction.rotateTo(x: CGFloat(position.x), y: CGFloat(position.y), z: CGFloat(position.z), duration: 0.01)
-            let moveSequence = SCNAction.sequence([motion])//, rotation])
+            let moveSequence = SCNAction.sequence([motion])
             let moveLoop = SCNAction.repeat(moveSequence, count: 1)
             parent.runAction(moveLoop)
-//            parent.pivot = SCNMatrix4MakeRotation(Float.pi, 0, 0, position.z)
-            
         }
     }
 
     @objc func decreaseDepth() {
         if let parent = miya?.parent {
+            
             let posZ = parent.position.z - 0.01
             parent.position.z = posZ
         }
@@ -285,8 +289,11 @@ class ARSCNViewController : UIViewController
     
     @objc func increaseDepth() {
         if let parent = miya?.parent {
-            let posZ = parent.position.z + 0.01
-            parent.position.z = posZ
+//            let posZ = parent.position.z + 0.01
+//            parent.position.z = posZ
+            
+            print(parent.orientation)
+            
         }
     }
     
