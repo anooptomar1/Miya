@@ -264,12 +264,8 @@ class ARSCNViewController : UIViewController
         if let parent = miya?.parent {
             if let POV = self.sceneView.pointOfView {
                 
-//                parent.rotate(by: POV.orientation, aroundTarget: position)
-//                parent.localRotate(by: POV.orientation)
-                let orient = SCNQuaternion.init(parent.orientation.x, parent.orientation.y, parent.orientation.z, parent.orientation.w)
-                parent.rotate(by: orient, aroundTarget: position)//SCNQuaternion(parent.orientation.x, parent.orientation.y, parent.orientation.z + 0.1, parent.orientation.w))
+
             }
-//            parent.rotation *= position
             
             let motion = SCNAction.move(to: position, duration: 0.84)
             motion.timingMode = .easeInEaseOut
@@ -279,11 +275,20 @@ class ARSCNViewController : UIViewController
         }
     }
 
+    func getUserDirection() -> SCNVector3 {
+        if let frame = self.sceneView.session.currentFrame {
+            let mat = SCNMatrix4(frame.camera.transform)
+            return SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33)
+        }
+        return SCNVector3(0, 0, -1)
+    }
+    
     @objc func decreaseDepth() {
         if let parent = miya?.parent {
-            
-            let posZ = parent.position.z - 0.01
-            parent.position.z = posZ
+//            let posZ = parent.position.z - 0.01
+//            parent.position.z = posZ
+            let direction = self.getUserDirection()
+            parent.physicsBody?.applyForce(direction, asImpulse: true)
         }
     }
     
@@ -291,6 +296,7 @@ class ARSCNViewController : UIViewController
         if let parent = miya?.parent {
 //            let posZ = parent.position.z + 0.01
 //            parent.position.z = posZ
+//            parent.rotation.z = parent.rotation.z + 0.1
             
             print(parent.orientation)
             
