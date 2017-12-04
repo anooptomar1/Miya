@@ -22,8 +22,7 @@ class ARSCNViewController : UIViewController
     //hud
     var hud : HUDViewController?
     var hudFeaturesSet : Bool = false
-
-    var collisionListenerTimer : Timer?
+    
     var globalZoomOutTimer : Timer?
     var globalZoomInTimer : Timer?
 //    override func loadView() {
@@ -43,14 +42,16 @@ class ARSCNViewController : UIViewController
         sceneView.showsStatistics = true
         sceneView.scene = scene
 
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3Make(0, 0, 25)
-        scene.rootNode.addChildNode(cameraNode)
+//        let cameraNode = SCNNode()
+//        cameraNode.camera = SCNCamera()
+//        cameraNode.position = SCNVector3Make(0, 0, 25)
+//        scene.rootNode.addChildNode(cameraNode)
         
         //find out to how to do this, need better constraint? or get Miya to manually face camera at all times
+        let lookAt = SCNBillboardConstraint()
+        
         //set up for miya
-        miyaSetUp(scene: scene)//, constraint: nil)
+        miyaSetUp(scene: scene, constraint: lookAt)
 
         //scene attributes
         sceneView.autoenablesDefaultLighting = true
@@ -96,14 +97,11 @@ class ARSCNViewController : UIViewController
                 }
                 
                 hud.startListening()
-//                collisionListenerTimer?.invalidate()
-//                collisionListenerTimer = Timer()
-//                collisionListenerTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(collisionWithHudComponents), userInfo: nil, repeats: true)
             }
         }
     }
     
-    func miyaSetUp(scene: SCNScene) {//}, constraint: SCNLookAtConstraint) {
+    func miyaSetUp(scene: SCNScene, constraint: SCNBillboardConstraint) {
         guard let jet = scene.rootNode.childNode(withName: "Jet", recursively: true) else{return}
         guard let viewPort = scene.rootNode.childNode(withName: "ViewPort", recursively: true) else{return}
         guard let bodyLining = scene.rootNode.childNode(withName: "BodyLining", recursively: true) else{return}
@@ -111,7 +109,36 @@ class ARSCNViewController : UIViewController
         
         miya = Miya(body: body, viewPort: viewPort, bodyLining: bodyLining, jet: jet)
 
-//        body.constraints?.append(constraint)
+        if let parent = miya?.parent
+        {
+            let (min, max) = parent.boundingBox
+            let dx = min.x + 0.5 * (max.x - min.x)
+            let dy = min.y + 0.5 * (max.y - min.y)
+            let dz = min.z + 0.5 * (max.z - min.z)
+            parent.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
+//            parent.pivot = SCNMatrix4MakeRotation(Float.pi, 1, 1, 0)
+            parent.scale = SCNVector3(0.2, 0.2, 0.2)
+//            parent.position = SCNVector3(-0.004, -0.382, -1.321)
+            let plane = SCNPlane(width: 0.2, height: 0.2)
+            let blueMaterial = SCNMaterial()
+            blueMaterial.diffuse.contents = UIColor.blue
+            plane.firstMaterial = blueMaterial
+            let container = SCNNode(geometry: plane)
+
+            constraint.freeAxes = .Y
+            container.constraints = [constraint]
+
+            container.position = SCNVector3(0, 0, -0.5)
+            container.addChildNode(parent)
+            container.isHidden = true
+            miya?.makeParent(parent: container)
+            
+            sceneView.scene.rootNode.addChildNode(container)
+            
+//
+//            let lookAt = SCNLookAtConstraint(target: sceneView.pointOfView)
+//            parent.pivot = SCNMatrix4MakeRotation(Float.pi, 0, 1, 0)
+        }
         
         miya?.miyaHoverAnimation()
         miya?.viewPortAnimation()

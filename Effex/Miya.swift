@@ -30,7 +30,7 @@ class Miya : NSObject {
         self.makeParent(parent: self.body)
     }
     
-    private func makeParent(parent: SCNNode?)
+    func makeParent(parent: SCNNode?)
     {
         self.parent = parent
     }
