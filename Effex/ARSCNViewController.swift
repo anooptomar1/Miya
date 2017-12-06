@@ -16,6 +16,10 @@ import AudioToolbox
 class ARSCNViewController : UIViewController
 {
     var miya : Miya?
+    var miyaPos : SCNVector3?
+    var userPos : SCNVector3?
+    var travAngle : Float?
+    
      @IBOutlet var sceneView : ARSCNView!
     var boxes : [Box]?
     
@@ -76,6 +80,10 @@ class ARSCNViewController : UIViewController
             
             hud.zoomOut?.alpha = 0.0
             hud.zoomIn?.alpha = 0.0
+            
+            self.userPos = self.sceneView.pointOfView?.position
+            self.travAngle = 0.0
+            print("User: \(self.userPos)")
         }
     }
     
@@ -112,20 +120,30 @@ class ARSCNViewController : UIViewController
             it.isGimbalLockEnabled = true
             parent.constraints = [it]
             parent.pivot = SCNMatrix4MakeRotation(Float.pi, 0, 1, 1)
+            self.miyaPos = parent.position
+            print("Miya: \(self.miyaPos)")
         }
         
         miya?.miyaHoverAnimation()
         miya?.viewPortAnimation()
         
         miya?.miyaParticleSetUp()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // Create a session configuration
+        
+        // Prevent the screen from being dimmed to avoid interuppting the AR experience.
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        // Start the `ARSession`.
+        resetTracking()
+    }
+    
+    func resetTracking() {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
-        // Run the view's session
-        sceneView.session.run(configuration)
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
     func checkForBox()
@@ -225,6 +243,19 @@ class ARSCNViewController : UIViewController
             guard let hitResult = result.last else{return}
             let hitTransform = SCNMatrix4(hitResult.worldTransform)
             let position = SCNVector3(x: hitTransform.m41, y: hitTransform.m42, z: hitTransform.m43)
+            print("Pos: \(position)")
+            self.userPos = self.sceneView.pointOfView?.position
+            if let m = self.miyaPos, let pov = self.userPos {
+                let a = SCNVector3.calcDistXZ(a: m, b: pov)
+                print("A: \(a)")
+                let b = SCNVector3.calcDistXZ(a: position, b: m)
+                print("B: \(b)")
+                let c = SCNVector3.calcDistXZ(a: position, b: pov)
+                print("C: \(c)")
+                travAngle = SCNVector3.calcTheta(a: a, b: b, c: c)
+                print("THETA: \(travAngle)")
+            }
+
             self.moveToTouch(position: position)
         }
     }
@@ -262,16 +293,12 @@ class ARSCNViewController : UIViewController
     func moveToTouch(position: SCNVector3)
     {
         if let parent = miya?.parent {
-            if let POV = self.sceneView.pointOfView {
-                
-
-            }
-            
             let motion = SCNAction.move(to: position, duration: 0.84)
             motion.timingMode = .easeInEaseOut
             let moveSequence = SCNAction.sequence([motion])
             let moveLoop = SCNAction.repeat(moveSequence, count: 1)
             parent.runAction(moveLoop)
+            self.miyaPos = position
         }
     }
 
@@ -285,17 +312,22 @@ class ARSCNViewController : UIViewController
     
     @objc func decreaseDepth() {
         if let parent = miya?.parent {
-//            let posZ = parent.position.z - 0.01
-//            parent.position.z = posZ
-            let direction = self.getUserDirection()
-            parent.physicsBody?.applyForce(direction, asImpulse: true)
+            if let theta = self.travAngle {
+                print("Theta: \(theta)")
+                let posX = parent.position.x - 0.01*sin(theta)
+                let posZ = parent.position.z - 0.01*cos(theta)
+                parent.position.x = posX
+                parent.position.z = posZ
+
+            }
+           //            parent.physicsBody?.applyForce(direction, asImpulse: true)
         }
     }
     
     @objc func increaseDepth() {
         if let parent = miya?.parent {
-//            let posZ = parent.position.z + 0.01
-//            parent.position.z = posZ
+            let posZ = parent.position.z + 0.01
+            parent.position.z = posZ
 //            parent.rotation.z = parent.rotation.z + 0.1
             
             print(parent.orientation)
