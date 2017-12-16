@@ -1,6 +1,0 @@
-framework module Pods_Effex {
-  umbrella header "Pods-Effex-umbrella.h"
-
-  export *
-  module * { export * }
-}

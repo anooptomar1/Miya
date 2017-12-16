@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04368A992AB8CCCCEB0F7DEB /* Pods_Miya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F579745157AEF80C51EFE85 /* Pods_Miya.framework */; };
+		284BFE1D1F1D979100D77B07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284BFE1C1F1D979100D77B07 /* AppDelegate.swift */; };
+		284BFE1F1F1D979100D77B07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284BFE1E1F1D979100D77B07 /* ViewController.swift */; };
+		284BFE221F1D979100D77B07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE201F1D979100D77B07 /* Main.storyboard */; };
+		284BFE241F1D979100D77B07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE231F1D979100D77B07 /* Assets.xcassets */; };
+		284BFE271F1D979100D77B07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE251F1D979100D77B07 /* LaunchScreen.storyboard */; };
+		284BFE2F1F1D9FFF00D77B07 /* parallax.html in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE2E1F1D9FFF00D77B07 /* parallax.html */; };
+		284BFE311F1DA3BF00D77B07 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE301F1DA3BF00D77B07 /* images */; };
+		284BFE331F1DA42700D77B07 /* parallax.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 284BFE321F1DA42700D77B07 /* parallax.min.js */; };
+		285958491F20266700A3DA89 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285958481F20266700A3DA89 /* Util.swift */; };
+		2859584C1F20335400A3DA89 /* parallax.css in Resources */ = {isa = PBXBuildFile; fileRef = 2859584B1F20335400A3DA89 /* parallax.css */; };
+		286383AC1F88081200D2120C /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286383AB1F88081200D2120C /* Box.swift */; };
+		286383AE1F88093800D2120C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286383AD1F88093800D2120C /* Action.swift */; };
+		28698C5F1F72CBA800FFE23E /* ARSCNViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28698C5E1F72CBA700FFE23E /* ARSCNViewController.swift */; };
+		28698C611F72CBF900FFE23E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 28698C601F72CBF900FFE23E /* art.scnassets */; };
+		28A942971F23F266002E4320 /* BlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942961F23F266002E4320 /* BlurButton.swift */; };
+		28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A942981F23F4C0002E4320 /* GTBackground.swift */; };
+		28A9429D1F243A87002E4320 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 28A9429C1F243A87002E4320 /* audio */; };
+		28E671AC1FD8644A0063A21E /* Equate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E671AB1FD8644A0063A21E /* Equate.swift */; };
+		28FB4E961FD2651900C29872 /* HUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FB4E951FD2651900C29872 /* HUDViewController.swift */; };
+		28FC0A2B1F6B153B0046DBE7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A291F6B153B0046DBE7 /* spark.png */; };
+		28FC0A2F1F6B19A30046DBE7 /* jetEmission.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */; };
+		28FC0A301F6B19A30046DBE7 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FC0A2E1F6B19A30046DBE7 /* bokeh.png */; };
+		28FC0A321F6B22F00046DBE7 /* Miya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC0A311F6B22F00046DBE7 /* Miya.swift */; };
+		28FEAF501F3AA3D3002EB5BC /* Animators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */; };
+		28FEAF521F3AA457002EB5BC /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */; };
+		28FEAF541F3B7F6B002EB5BC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */; };
+		28FEAF561F3BAD9A002EB5BC /* ModalAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		00271CDACDEC9CCD679B6A2D /* Pods-Miya.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Miya.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Miya/Pods-Miya.debug.xcconfig"; sourceTree = "<group>"; };
+		284BFE191F1D979100D77B07 /* Miya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Miya.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		284BFE1C1F1D979100D77B07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		284BFE1E1F1D979100D77B07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		284BFE211F1D979100D77B07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		284BFE231F1D979100D77B07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		284BFE261F1D979100D77B07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		284BFE281F1D979100D77B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		284BFE2E1F1D9FFF00D77B07 /* parallax.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = parallax.html; sourceTree = "<group>"; };
+		284BFE301F1DA3BF00D77B07 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		284BFE321F1DA42700D77B07 /* parallax.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = parallax.min.js; sourceTree = "<group>"; };
+		285958481F20266700A3DA89 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		2859584B1F20335400A3DA89 /* parallax.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = parallax.css; sourceTree = "<group>"; };
+		286383AB1F88081200D2120C /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		286383AD1F88093800D2120C /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		28698C5E1F72CBA700FFE23E /* ARSCNViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNViewController.swift; sourceTree = "<group>"; };
+		28698C601F72CBF900FFE23E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		28A942961F23F266002E4320 /* BlurButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurButton.swift; sourceTree = "<group>"; };
+		28A942981F23F4C0002E4320 /* GTBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTBackground.swift; sourceTree = "<group>"; };
+		28A9429C1F243A87002E4320 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
+		28E671AB1FD8644A0063A21E /* Equate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equate.swift; sourceTree = "<group>"; };
+		28FB4E951FD2651900C29872 /* HUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDViewController.swift; sourceTree = "<group>"; };
+		28FC0A291F6B153B0046DBE7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = jetEmission.scnp; sourceTree = "<group>"; };
+		28FC0A2E1F6B19A30046DBE7 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		28FC0A311F6B22F00046DBE7 /* Miya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miya.swift; sourceTree = "<group>"; };
+		28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animators.swift; sourceTree = "<group>"; };
+		28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
+		28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalAuthViewController.swift; sourceTree = "<group>"; };
+		3F579745157AEF80C51EFE85 /* Pods_Miya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Miya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB77F95A6CACE1410820FC5D /* Pods-Miya.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Miya.release.xcconfig"; path = "Pods/Target Support Files/Pods-Miya/Pods-Miya.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		284BFE161F1D979100D77B07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04368A992AB8CCCCEB0F7DEB /* Pods_Miya.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		284BFE101F1D979100D77B07 = {
+			isa = PBXGroup;
+			children = (
+				284BFE1B1F1D979100D77B07 /* Miya */,
+				284BFE1A1F1D979100D77B07 /* Products */,
+				64AD5E7FCB5606D19D46E219 /* Pods */,
+				B90036F84075631A320DCB2A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		284BFE1A1F1D979100D77B07 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				284BFE191F1D979100D77B07 /* Miya.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		284BFE1B1F1D979100D77B07 /* Miya */ = {
+			isa = PBXGroup;
+			children = (
+				287A16B61F3A9CB4001D30C2 /* CustomResources */,
+				287A16B51F3A9CAA001D30C2 /* Util */,
+				286383AA1F8807A500D2120C /* Models */,
+				287A16B41F3A9C97001D30C2 /* ViewControllers */,
+				2859584A1F20332D00A3DA89 /* web */,
+				284BFE301F1DA3BF00D77B07 /* images */,
+				28A9429C1F243A87002E4320 /* audio */,
+				284BFE201F1D979100D77B07 /* Main.storyboard */,
+				28698C601F72CBF900FFE23E /* art.scnassets */,
+				284BFE231F1D979100D77B07 /* Assets.xcassets */,
+				284BFE251F1D979100D77B07 /* LaunchScreen.storyboard */,
+				284BFE281F1D979100D77B07 /* Info.plist */,
+			);
+			path = Miya;
+			sourceTree = "<group>";
+		};
+		2859584A1F20332D00A3DA89 /* web */ = {
+			isa = PBXGroup;
+			children = (
+				284BFE321F1DA42700D77B07 /* parallax.min.js */,
+				284BFE2E1F1D9FFF00D77B07 /* parallax.html */,
+				2859584B1F20335400A3DA89 /* parallax.css */,
+			);
+			name = web;
+			sourceTree = "<group>";
+		};
+		286383AA1F8807A500D2120C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				286383AB1F88081200D2120C /* Box.swift */,
+				286383AD1F88093800D2120C /* Action.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		287A16B41F3A9C97001D30C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				284BFE1E1F1D979100D77B07 /* ViewController.swift */,
+				28FEAF531F3B7F6B002EB5BC /* AuthViewController.swift */,
+				28698C5E1F72CBA700FFE23E /* ARSCNViewController.swift */,
+				28FEAF551F3BAD9A002EB5BC /* ModalAuthViewController.swift */,
+				28FB4E951FD2651900C29872 /* HUDViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		287A16B51F3A9CAA001D30C2 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				284BFE1C1F1D979100D77B07 /* AppDelegate.swift */,
+				285958481F20266700A3DA89 /* Util.swift */,
+				28E671AB1FD8644A0063A21E /* Equate.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		287A16B61F3A9CB4001D30C2 /* CustomResources */ = {
+			isa = PBXGroup;
+			children = (
+				28A942981F23F4C0002E4320 /* GTBackground.swift */,
+				28A942961F23F266002E4320 /* BlurButton.swift */,
+				28FEAF4F1F3AA3D3002EB5BC /* Animators.swift */,
+				28FEAF511F3AA457002EB5BC /* NavigationControllerDelegate.swift */,
+				28FC0A311F6B22F00046DBE7 /* Miya.swift */,
+				28B71E461F6B0FBF006D24D3 /* Particles */,
+			);
+			name = CustomResources;
+			sourceTree = "<group>";
+		};
+		28B71E461F6B0FBF006D24D3 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				28FC0A2D1F6B19A30046DBE7 /* jetEmission.scnp */,
+				28FC0A2E1F6B19A30046DBE7 /* bokeh.png */,
+				28FC0A291F6B153B0046DBE7 /* spark.png */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
+		64AD5E7FCB5606D19D46E219 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				00271CDACDEC9CCD679B6A2D /* Pods-Miya.debug.xcconfig */,
+				CB77F95A6CACE1410820FC5D /* Pods-Miya.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B90036F84075631A320DCB2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F579745157AEF80C51EFE85 /* Pods_Miya.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		284BFE181F1D979100D77B07 /* Miya */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 284BFE2B1F1D979100D77B07 /* Build configuration list for PBXNativeTarget "Miya" */;
+			buildPhases = (
+				08AFE9F723E7672657994BA3 /* [CP] Check Pods Manifest.lock */,
+				284BFE151F1D979100D77B07 /* Sources */,
+				284BFE161F1D979100D77B07 /* Frameworks */,
+				284BFE171F1D979100D77B07 /* Resources */,
+				224CF0C86146165463C24F66 /* [CP] Embed Pods Frameworks */,
+				4FB6A3297ACAA63803179AB8 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Miya;
+			productName = Effex;
+			productReference = 284BFE191F1D979100D77B07 /* Miya.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		284BFE111F1D979100D77B07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Steven Hurtado";
+				TargetAttributes = {
+					284BFE181F1D979100D77B07 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = E55B666VZ8;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 284BFE141F1D979100D77B07 /* Build configuration list for PBXProject "Miya" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 284BFE101F1D979100D77B07;
+			productRefGroup = 284BFE1A1F1D979100D77B07 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				284BFE181F1D979100D77B07 /* Miya */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		284BFE171F1D979100D77B07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28FC0A2B1F6B153B0046DBE7 /* spark.png in Resources */,
+				284BFE311F1DA3BF00D77B07 /* images in Resources */,
+				28698C611F72CBF900FFE23E /* art.scnassets in Resources */,
+				284BFE271F1D979100D77B07 /* LaunchScreen.storyboard in Resources */,
+				284BFE2F1F1D9FFF00D77B07 /* parallax.html in Resources */,
+				28FC0A301F6B19A30046DBE7 /* bokeh.png in Resources */,
+				28FC0A2F1F6B19A30046DBE7 /* jetEmission.scnp in Resources */,
+				2859584C1F20335400A3DA89 /* parallax.css in Resources */,
+				284BFE331F1DA42700D77B07 /* parallax.min.js in Resources */,
+				284BFE241F1D979100D77B07 /* Assets.xcassets in Resources */,
+				284BFE221F1D979100D77B07 /* Main.storyboard in Resources */,
+				28A9429D1F243A87002E4320 /* audio in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08AFE9F723E7672657994BA3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		224CF0C86146165463C24F66 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Miya/Pods-Miya-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FB6A3297ACAA63803179AB8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Miya/Pods-Miya-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		284BFE151F1D979100D77B07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28FEAF501F3AA3D3002EB5BC /* Animators.swift in Sources */,
+				286383AE1F88093800D2120C /* Action.swift in Sources */,
+				28FEAF561F3BAD9A002EB5BC /* ModalAuthViewController.swift in Sources */,
+				28A942971F23F266002E4320 /* BlurButton.swift in Sources */,
+				284BFE1F1F1D979100D77B07 /* ViewController.swift in Sources */,
+				28FC0A321F6B22F00046DBE7 /* Miya.swift in Sources */,
+				285958491F20266700A3DA89 /* Util.swift in Sources */,
+				28FEAF541F3B7F6B002EB5BC /* AuthViewController.swift in Sources */,
+				28A942991F23F4C0002E4320 /* GTBackground.swift in Sources */,
+				28698C5F1F72CBA800FFE23E /* ARSCNViewController.swift in Sources */,
+				28E671AC1FD8644A0063A21E /* Equate.swift in Sources */,
+				286383AC1F88081200D2120C /* Box.swift in Sources */,
+				28FEAF521F3AA457002EB5BC /* NavigationControllerDelegate.swift in Sources */,
+				28FB4E961FD2651900C29872 /* HUDViewController.swift in Sources */,
+				284BFE1D1F1D979100D77B07 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		284BFE201F1D979100D77B07 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				284BFE211F1D979100D77B07 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		284BFE251F1D979100D77B07 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				284BFE261F1D979100D77B07 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		284BFE291F1D979100D77B07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		284BFE2A1F1D979100D77B07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		284BFE2C1F1D979100D77B07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00271CDACDEC9CCD679B6A2D /* Pods-Miya.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E55B666VZ8;
+				INFOPLIST_FILE = Miya/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Miya;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		284BFE2D1F1D979100D77B07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB77F95A6CACE1410820FC5D /* Pods-Miya.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E55B666VZ8;
+				INFOPLIST_FILE = Miya/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StevenHurtado.Miya;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		284BFE141F1D979100D77B07 /* Build configuration list for PBXProject "Miya" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				284BFE291F1D979100D77B07 /* Debug */,
+				284BFE2A1F1D979100D77B07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		284BFE2B1F1D979100D77B07 /* Build configuration list for PBXNativeTarget "Miya" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				284BFE2C1F1D979100D77B07 /* Debug */,
+				284BFE2D1F1D979100D77B07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 284BFE111F1D979100D77B07 /* Project object */;
+}
