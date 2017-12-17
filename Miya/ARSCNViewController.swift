@@ -68,6 +68,7 @@ class ARSCNViewController : UIViewController
         
         //collection view set up
 //        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 250, height: 250))
+        
     }
     
     func hudSetUp() {
@@ -80,10 +81,6 @@ class ARSCNViewController : UIViewController
             
             hud.zoomOut?.alpha = 0.0
             hud.zoomIn?.alpha = 0.0
-            
-            self.userPos = self.sceneView.pointOfView?.position
-            self.travAngle = 0.0
-            print("User: \(self.userPos)")
         }
     }
     
@@ -120,8 +117,6 @@ class ARSCNViewController : UIViewController
             it.isGimbalLockEnabled = true
             parent.constraints = [it]
             parent.pivot = SCNMatrix4MakeRotation(Float.pi, 0, 1, 1)
-            self.miyaPos = parent.position
-            print("Miya: \(self.miyaPos)")
         }
         
         miya?.miyaHoverAnimation()
@@ -132,12 +127,23 @@ class ARSCNViewController : UIViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
         // Prevent the screen from being dimmed to avoid interuppting the AR experience.
         UIApplication.shared.isIdleTimerDisabled = true
         
         // Start the `ARSession`.
         resetTracking()
+        
+        self.miya?.parent?.opacity = 0.0
+        self.miya?.parent?.isHidden = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let when = DispatchTime.now() + 0.84 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.miya?.parent?.runAction(SCNAction.fadeIn(duration: 0.84))
+        }
     }
     
     func resetTracking() {
@@ -243,19 +249,6 @@ class ARSCNViewController : UIViewController
             guard let hitResult = result.last else{return}
             let hitTransform = SCNMatrix4(hitResult.worldTransform)
             let position = SCNVector3(x: hitTransform.m41, y: hitTransform.m42, z: hitTransform.m43)
-            print("Pos: \(position)")
-            self.userPos = self.sceneView.pointOfView?.position
-            if let m = self.miyaPos, let pov = self.userPos {
-                let a = SCNVector3.calcDistXZ(a: m, b: pov)
-                print("A: \(a)")
-                let b = SCNVector3.calcDistXZ(a: position, b: m)
-                print("B: \(b)")
-                let c = SCNVector3.calcDistXZ(a: position, b: pov)
-                print("C: \(c)")
-                travAngle = SCNVector3.calcTheta(a: a, b: b, c: c)
-                print("THETA: \(travAngle)")
-            }
-
             self.moveToTouch(position: position)
         }
     }
@@ -265,8 +258,6 @@ class ARSCNViewController : UIViewController
         
         if hudFeaturesSet, let hud = self.hud {
             let location = touch.location(in: hud.view)
-            print(location)
-            print(hud.zoomIn?.frame)
             if let touchView = hud.touchViewer {
                 //update visible position of touch
                 touchView.frame.origin = CGPoint(x: location.x-touchView.frame.width/2, y: location.y-touchView.frame.height/2)
@@ -277,19 +268,13 @@ class ARSCNViewController : UIViewController
         }
     }
     
-    func CGPointToSCNVector3(view: SCNView, depth: Float, point: CGPoint) -> SCNVector3 {
-        let projectedOrigin = view.projectPoint(SCNVector3Make(0, 0, depth))
-        let locationWithz   = SCNVector3Make(Float(point.x), Float(point.y), projectedOrigin.z)
-        return view.unprojectPoint(locationWithz)
-    }
-    
-    func getDirection(for point: CGPoint, in view: SCNView) -> SCNVector3 {
-        let farPoint  = view.unprojectPoint(SCNVector3Make(Float(point.x), Float(point.y), 1))
-        let nearPoint = view.unprojectPoint(SCNVector3Make(Float(point.x), Float(point.y), 0))
-        
-        return SCNVector3Make(farPoint.x - nearPoint.x, farPoint.y - nearPoint.y, farPoint.z - nearPoint.z)
-    }
-    
+//    func sceneSpacePosition(inFrontOf node: SCNNode, atDistance distance: Float) -> SCNVector3 {
+//        let localPosition = SCNVector3(x: 0, y: 0, z: CGFloat(-distance))
+//        let scenePosition = node.convertPosition(localPosition, to: nil)
+//        // to: nil is automatically scene space
+//        return scenePosition
+//    }
+//
     func moveToTouch(position: SCNVector3)
     {
         if let parent = miya?.parent {
@@ -311,16 +296,14 @@ class ARSCNViewController : UIViewController
     }
     
     @objc func decreaseDepth() {
-        if let parent = miya?.parent {
-            if let theta = self.travAngle {
-                print("Theta: \(theta)")
-                let posX = parent.position.x - 0.01*sin(theta)
-                let posZ = parent.position.z - 0.01*cos(theta)
-                parent.position.x = posX
-                parent.position.z = posZ
-
-            }
-           //            parent.physicsBody?.applyForce(direction, asImpulse: true)
+        if let parent = miya?.parent, let theta = self.sceneView.pointOfView?.simdWorldOrientation.angle {
+            print("WORLD FRONT: \(self.sceneView.pointOfView?.simdWorldFront)")
+            print("WORLD ORIENTATION: \(self.sceneView.pointOfView?.simdWorldOrientation)")
+            print("\nWORLD THETA")
+            print(theta)
+            print("\n")
+            parent.simdPosition.x  = parent.simdPosition.x - Float(0.01*sin(theta))
+            parent.simdPosition.z  = parent.simdPosition.z - Float(0.01*cos(theta))
         }
     }
     
@@ -328,10 +311,6 @@ class ARSCNViewController : UIViewController
         if let parent = miya?.parent {
             let posZ = parent.position.z + 0.01
             parent.position.z = posZ
-//            parent.rotation.z = parent.rotation.z + 0.1
-            
-            print(parent.orientation)
-            
         }
     }
     
