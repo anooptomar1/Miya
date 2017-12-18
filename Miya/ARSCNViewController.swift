@@ -300,10 +300,11 @@ class ARSCNViewController : UIViewController
             print("WORLD FRONT: \(self.sceneView.pointOfView?.simdWorldFront)")
             print("WORLD ORIENTATION: \(self.sceneView.pointOfView?.simdWorldOrientation)")
             print("\nWORLD THETA")
+            guard let imagX = self.sceneView.pointOfView?.simdWorldOrientation.imag.x, let imagY = self.sceneView.pointOfView?.simdWorldOrientation.imag.y else{return}
             print(theta)
             print("\n")
-            parent.simdPosition.x  = parent.simdPosition.x - Float(0.01*sin(theta))
-            parent.simdPosition.z  = parent.simdPosition.z - Float(0.01*cos(theta))
+            parent.simdPosition.x  = parent.simdPosition.x - Float(0.01*sin(imagX < 0 && imagY < 0 ? -theta : theta))
+            parent.simdPosition.z  = parent.simdPosition.z - Float(0.01*cos(imagX < 0 && imagY < 0 ? -theta : theta))
         }
     }
     
